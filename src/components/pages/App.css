@@ -100,7 +100,9 @@ input.input_area {
 }
 
 #password_advice_box {
-  padding-left: 20px;
+  height: 12vh;
+  border-radius: 10px;
+  padding-left: 30px;
   background-color: #265ba7;
   width: 60%;
 }
@@ -108,12 +110,6 @@ input.input_area {
 #content_section_rigth {
   display: grid;
   align-items: center;
-}
-#p_area {
-  justify-content: end;
-  justify-content: center;
-  justify-items: center;
-  width: 23vw;
 }
 
 #footer_itens {
