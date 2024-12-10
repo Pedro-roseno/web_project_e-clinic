@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+#main {
+  display: grid;
+  grid-template-rows: 0.2fr 1fr 0.1fr;
+  height: 100vh;
+  width: 100vw;
+  background-color: #d9d9d9;
+}
+#navbar_area {
+  height: 10vh;
+}
+#content_area {
+  background-color: #d9d9d9;
+  color: #fff;
+  display: grid;
+  grid-template-columns: 0.6fr 0.4fr;
+}
+
+#footer_area {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: space-around;
+  margin-bottom: 0px;
+  height: 14vh;
+  background-color: #265ba7;
+  padding-left: 20px;
+  align-content: center;
+  color: #fff;
+  font-family: "Encode Sans Condensed", sans-serif;
+}
+#footer_section {
+  width: 70px;
+  font-family: "Encode Sans Condensed", sans-serif;
+  display: grid;
+  align-content: center;
+}
+#nav > h1 {
+  font-size: 43px;
+  font-family: "Encode Sans Condensed", sans-serif;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+}
+
+#nav {
+  background-color: #265ba7;
+  height: 10vh;
+}
+
+.header {
+  height: 12vh;
+}
+#content_section_left {
+  height: 60vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.2fr 0.2fr 0.6fr 0.5fr;
+  justify-content: center;
+}
+
+.inputs_section {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-content: center;
+  width: 100%;
+}
+.input_area {
+  border-radius: 8px;
+  height: 5vh;
+}
+input.input_area {
+  width: 23vw;
+}
+#logo {
+  height: 20vh;
+}
+#image_section {
+  display: grid;
+  justify-content: center;
+}
+#content_section_left > h1 {
+  align-content: center;
+  text-align: center;
+}
+
+#button_area {
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+  margin: 0px;
+}
+
+#form_button {
+  border-radius: 4px;
+  width: 20vw;
+  height: 6vh;
+  background-color: #265ba7;
+  color: #fff;
+}
+
+#password_advice_box {
+  height: 12vh;
+  border-radius: 10px;
+  padding-left: 30px;
+  background-color: #265ba7;
+  width: 60%;
+}
+
+#content_section_rigth {
+  display: grid;
+  align-items: center;
+}
+
+#footer_itens {
+  justify-content: center;
+  width: 20px;
+}
+
+.footer_itens > a {
+  color: #fff;
+}
