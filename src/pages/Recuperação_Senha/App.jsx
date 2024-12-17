@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./app.css";
 import logo from "../../assets/logo.png";
 
-function App() {
+function RecSenha() {
   const [count, setCount] = useState(0);
 
   return (
@@ -99,4 +99,4 @@ function App() {
   );
 }
 
-export default App;
+export default RecSenha;
