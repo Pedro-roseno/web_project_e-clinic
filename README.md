@@ -7,7 +7,7 @@ O **eClinic+** é uma aplicação de telemedicina que integra um chatbot, permit
 ## Tecnologias Utilizadas 🛠️
 - **React 🌐**: é uma biblioteca JavaScript para criar interfaces de usuário interativas e baseadas em componentes reutilizáveis.
 - **Vite💻**: permite configurar, desenvolver e buildar projetos frontend de forma rápida, com hot reload e otimização de performance.
-- **Semantic UI React 📖 **: fornece componentes prontos e personalizáveis para criar interfaces de usuário modernas e responsivas com facilidade.
+- **Semantic UI React 📖**: fornece componentes prontos e personalizáveis para criar interfaces de usuário modernas e responsivas com facilidade.
 
 ## Funcionalidades 🌟
 - **Login e Cadastro**: Usuários podem criar contas e fazer login na aplicação.
