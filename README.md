@@ -15,4 +15,4 @@ O **eClinic+** é uma aplicação de telemedicina que integra um chatbot, permit
 - **Verificação de Agenda**: Usuários podem visualizar suas consultas agendadas.
 - **Interação via Chatbot**: O chatbot ajuda os usuários a navegar pela aplicação e agendar consultas.
 
-## como rodar o código ' npm run dev ou npm start'
+## como rodar o código: 'npm run dev ou npm start'
