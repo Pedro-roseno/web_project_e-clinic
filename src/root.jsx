@@ -1,13 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RecSenha from "./pages/Recuperação_Senha/App";
-import Home from "./pages/Home/app";
+//import Home from "./pages/Home/app";
 import MenuLayout from "./pages/Tela_chatbot/app";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
+
   {
     path: "/recuperação_de_senha",
     element: <RecSenha />,
