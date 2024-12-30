@@ -37,7 +37,6 @@ const Footer = () => {
         <h2>Siga-nos nas nossas redes sociais</h2>
         <li className="footer_itens">
           <a href="#eClinic">eClinic.c</a>
-          <img src={insta} alt="intagram" />
         </li>
       </ul>
     </div>
