@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RecSenha from "./pages/Recuperação_Senha/App";
+import RecSenha from "./pages/Recuperação_Senha/FormRecuperacao.jsx";
 //import Home from "./pages/Home/app";
 import MenuLayout from "./pages/Tela_chatbot/app";
 

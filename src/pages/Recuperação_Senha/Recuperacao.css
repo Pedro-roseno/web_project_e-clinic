@@ -82,14 +82,139 @@ input.input_area {
 }
 
 #password_advice_box {
-  height: 12vh;
+  height: 19vh;
   border-radius: 10px;
   padding-left: 30px;
   background-color: #265ba7;
-  width: 60%;
+  width: auto;
+  position: left;
+ 
 }
 
 #content_section_rigth {
   display: grid;
   align-items: center;
 }
+
+
+
+/* Reposividades */
+
+
+@media(max-width:1000px) {
+
+#content_area{
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+#navbar_area{
+  height: 37px;
+}
+
+#nav > h1{
+ font-size: 30px;
+
+}
+
+#logo{
+  height: 20vh;
+}
+
+  #content_section_left ,h1 {
+    font-size: 16px;
+
+  }
+
+  input.input_area {
+  width: 160px;
+  font-size: 13px;
+  grid-column: 3 /-2;
+  text-align: left;
+  
+  }
+
+  #button_area > button{
+    font-size: 12px;
+   justify-content: center;
+   width: 100px;
+   
+  }
+
+
+  #contet_area{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+ 
+  #content_setion_left{
+    grid-template-rows: auto;
+    padding: 15px;
+    justify-content: center;
+  }
+
+  #form_button{
+    width: 100%;
+  }
+#content_section_rigth{
+  margin-bottom: 26px;
+
+}
+  #password_advice_box{
+    width: 100%;
+    font-size: 12px;
+    text-align: left;
+    height: auto;
+    padding: 10px 20px;
+    gap: 10px ;
+    
+  }
+
+  #password_advice_box ul, li{
+   list-style: none;
+   
+  }
+
+}
+
+
+
+@media(min-width:900px) {
+
+  #content_area{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #navbar_area{
+    height: 37px;
+  }
+  input.input_area {
+   
+    text-align: center;
+    
+    }
+
+  #password_advice_box{
+    height: 19vh;
+    width: 60vh;
+    
+  }
+
+  #password_advice_box , p{
+    font-size: 17px;
+
+  }
+  #password_advice_box ,ul > li{
+    list-style: none;
+    font-size: 15px;
+    gap: 5px;
+   }
+
+   input.input_area{
+    width: 200px;
+
+   }
+
+}
+

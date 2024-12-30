@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./app.css";
+import "./Recuperacao.css";
 import "../../styles/global.css";
 import logo from "../../assets/logo.png";
 import Footer from "../../components/footer/app";

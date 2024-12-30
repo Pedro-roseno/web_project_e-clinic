@@ -1,6 +1,7 @@
 // Footer.js
 import React from "react";
 import "./app.css";
+import insta from "../../assets/insta.png";
 
 const Footer = () => {
   return (
@@ -14,7 +15,7 @@ const Footer = () => {
       <ul>
         <h2>Contato e Suporte</h2>
         <li className="footer_itens">
-          <a href="mailto:eclinic1001@gmail.com">eclinic1001@gmail.com</a>
+          <a href="mailto:eclinic1001@gmail.com"  >eclinic1001@gmail.com</a>
         </li>
         <li className="footer_itens">
           <a href="tel:+5581900000000">(81) 9000-0000</a>
@@ -36,6 +37,7 @@ const Footer = () => {
         <h2>Siga-nos nas nossas redes sociais</h2>
         <li className="footer_itens">
           <a href="#eClinic">eClinic.c</a>
+          <img src={insta} alt="intagram" />
         </li>
       </ul>
     </div>
