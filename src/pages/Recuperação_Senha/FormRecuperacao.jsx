@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import "./app.css";
 import "../../styles/global.css";
 import logo from "../../assets/logo.png";
@@ -6,6 +7,35 @@ import Footer from "../../components/footer/app";
 
 function RecSenha() {
   const [count, setCount] = useState(0);
+
+  const [novasenha, setNovaSenha] = useState();
+  const [cormfirmarsenha, setComfirmarSenha] = useState();
+
+  function salvar() {
+
+		let recsenhaRequest = {
+      novasenha:  novasenha,
+      cormfirmarsenha: cormfirmarsenha
+		   
+		}
+	
+		axios.post("http://localhost:8080/api/medicos", recsenhaRequest)
+		.then((response) => {
+		     console.log('Senha alterada com sucesso.')
+		})
+		.catch((error) => {
+		     console.log('Erro ao alterar o a senha.')
+		})
+	
+  axios.post("http://localhost:8080/api/pacientes", recsenhaRequest)
+  .then((response) => {
+       console.log('Senha alterada com sucesso.')
+  })
+  .catch((error) => {
+       console.log('Erro ao alterar o a senha..')
+  })
+}
+
 
   return (
     <>
@@ -29,16 +59,23 @@ function RecSenha() {
                 required
                 type="password"
                 placeholder="Digite sua nova senha"
+                value={novasenha}
+			          onChange={e => setNovaSenha(e.target.value)}
+
               />
               <input
                 className="input_area"
                 required
                 type="password"
                 placeholder="Confirme sua nova senha"
+                value={cormfirmarsenha}
+			          onChange={e => setComfirmarSenha(e.target.value)}
+
               />
             </section>
             <div id="button_area">
-              <button id="form_button">Alterar senha</button>
+              <button id="form_button" onClick={() => salvar()}
+              >Alterar senha</button>
             </div>
           </div>
           <div id="content_section_rigth">
