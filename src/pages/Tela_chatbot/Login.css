@@ -18,8 +18,9 @@
     display: flex;
     justify-content: space-between;
     color: #fff;
-    padding-left: 15px;
+    padding-left: 20px;
    text-align: center;
+   align-items: center;
   }
 
   #nav2 {
@@ -35,7 +36,7 @@
     display: flex;
     gap: 30px;
     list-style: none;
-    padding: 15px;
+    padding-right: 17px;
   }
 
   #ul-area > li > a{
