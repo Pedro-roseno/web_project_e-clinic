@@ -18,7 +18,7 @@
     display: flex;
     justify-content: space-between;
     color: #fff;
-    padding-left: 20px;
+    padding-left: 36px;
    text-align: center;
    align-items: center;
   }
@@ -36,7 +36,7 @@
     display: flex;
     gap: 30px;
     list-style: none;
-    padding-right: 17px;
+    padding-right: 34rem;
   }
 
   #ul-area > li > a{
