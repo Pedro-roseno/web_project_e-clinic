@@ -44,4 +44,45 @@
     color: #fff;
   }
 
+  #content_section_rigth {
+    display: grid;
+    align-items: center;
+    padding-left: 8rem;
+    height:12rem ;
+  }
+
+  #password_advice_box {
+    height: 45vh;
+    border-radius: 10px;
+    padding-left: 15px;
+    background-color: #D9D9D9;
+    width: 40%;
+  }
+
+  #p_area{
+    margin-top: 3px;
+    color: #000;
+    font-size: 18px;
+    text-align: left;
+  }
+
+  #p_area2{
+   margin-top: 9px;
+  }
+
+  #ul-area2{
+    margin-top: 5px;
+  }
+
+  #ul-area2 > li{
+    margin-top: 5px;
+    list-style: none;
+  }
+
+  #span{
+    margin-top: 15px;
+  }
+
+
+
 
