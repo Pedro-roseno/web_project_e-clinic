@@ -45,18 +45,23 @@
   }
 
   #content_section_rigth {
-    display: grid;
+    display: flex;
     align-items: center;
     padding-left: 8rem;
     height:12rem ;
+    
+
   }
 
   #password_advice_box {
+    display: grid;
     height: 45vh;
     border-radius: 10px;
     padding-left: 15px;
     background-color: #D9D9D9;
     width: 40%;
+    margin-top: 64px;
+   
   }
 
   #p_area{
@@ -81,6 +86,37 @@
 
   #span{
     margin-top: 15px;
+  }
+
+  #robo{
+    display: flex;
+    max-height: 120px;
+    max-width: 50%;
+    border-radius: 20%;
+    padding: 0px;
+    margin :0px;
+    justify-items: center;
+    margin-bottom: 27px;
+    margin-left: 26px;
+  }
+
+  #area-baixo > input{
+   height: 34px ;
+   width: 66%;
+   align-items: center;
+   margin-left: 89px;
+   border-radius: 6px;
+   justify-content: center;
+   background: #D9D9D9;
+  }
+
+  #botao{
+    height: 34px;
+    width: 70px;
+   margin-left: 20px ;
+   background: #265BA7;
+   color: #fff;
+   border-radius: 4px;
   }
 
 
