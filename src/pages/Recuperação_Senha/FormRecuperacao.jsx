@@ -1,12 +1,13 @@
 import { useState } from "react";
+import "./Recuperacao.css";
 import axios from "axios";
-import "./app.css";
 import "../../styles/global.css";
 import logo from "../../assets/logo.png";
 import Footer from "../../components/footer/app";
 
 function RecSenha() {
   const [count, setCount] = useState(0);
+
 
   const [novasenha, setNovaSenha] = useState();
   const [cormfirmarsenha, setComfirmarSenha] = useState();
@@ -36,7 +37,6 @@ function RecSenha() {
   })
 }
 
-
   return (
     <>
       <div id="main">
@@ -59,8 +59,10 @@ function RecSenha() {
                 required
                 type="password"
                 placeholder="Digite sua nova senha"
+
                 value={novasenha}
 			          onChange={e => setNovaSenha(e.target.value)}
+
 
               />
               <input
@@ -68,6 +70,12 @@ function RecSenha() {
                 required
                 type="password"
                 placeholder="Confirme sua nova senha"
+
+              />
+            </section>
+            <div id="button_area">
+              <button id="form_button">Alterar senha</button>
+
                 value={cormfirmarsenha}
 			          onChange={e => setComfirmarSenha(e.target.value)}
 
@@ -76,6 +84,7 @@ function RecSenha() {
             <div id="button_area">
               <button id="form_button" onClick={() => salvar()}
               >Alterar senha</button>
+
             </div>
           </div>
           <div id="content_section_rigth">
