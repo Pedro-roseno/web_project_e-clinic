@@ -82,6 +82,7 @@ input.input_area {
 }
 
 #password_advice_box {
+
   height: 19vh;
   border-radius: 10px;
   padding-left: 30px;
@@ -89,12 +90,14 @@ input.input_area {
   width: auto;
   position: left;
  
+
 }
 
 #content_section_rigth {
   display: grid;
   align-items: center;
 }
+
 
 
 

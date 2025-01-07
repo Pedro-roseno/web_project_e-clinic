@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+#principal{
+    display: grid;
+    grid-template-rows: 0.2fr 1fr 0.1fr;
+    height: 100vh;
+    width: 100vw;
+    background-color: #1A2D4E;
+  }
+
+  #navbar_area2 {
+    height: 10vh;
+  }
+
+  #nav2 > h1 {
+    font-size: 43px;
+    font-family: "Encode Sans Condensed", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    padding-left: 36px;
+   text-align: center;
+   align-items: center;
+  }
+
+  #nav2 {
+    display: flex;
+    background-color: #265ba7;
+    height: 10vh;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+  }
+
+  #ul-area {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    padding-right: 34rem;
+  }
+
+  #ul-area > li > a{
+    text-decoration: none;
+    color: #fff;
+  }
+
+  #content_section_rigth {
+    display: flex;
+    align-items: center;
+    padding-left: 8rem;
+    height:12rem ;
+    
+
+  }
+
+  #password_advice_box {
+    display: grid;
+    height: 45vh;
+    border-radius: 10px;
+    padding-left: 15px;
+    background-color: #D9D9D9;
+    width: 40%;
+    margin-top: 64px;
+   
+  }
+
+  #p_area{
+    margin-top: 3px;
+    color: #000;
+    font-size: 18px;
+    text-align: left;
+  }
+
+  #p_area2{
+   margin-top: 9px;
+  }
+
+  #ul-area2{
+    margin-top: 5px;
+  }
+
+  #ul-area2 > li{
+    margin-top: 5px;
+    list-style: none;
+  }
+
+  #span{
+    margin-top: 15px;
+  }
+
+  #robo{
+    display: flex;
+    max-height: 120px;
+    max-width: 50%;
+    border-radius: 20%;
+    padding: 0px;
+    margin :0px;
+    justify-items: center;
+    margin-bottom: 27px;
+    margin-left: 26px;
+  }
+
+  #area-baixo > input{
+   height: 34px ;
+   width: 66%;
+   align-items: center;
+   margin-left: 89px;
+   border-radius: 6px;
+   justify-content: center;
+   background: #D9D9D9;
+  }
+
+  #botao{
+    height: 34px;
+    width: 70px;
+   margin-left: 20px ;
+   background: #265BA7;
+   color: #fff;
+   border-radius: 4px;
+  }
+
+
+
+

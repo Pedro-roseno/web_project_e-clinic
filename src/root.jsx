@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RecSenha from "./pages/Recuperação_Senha/FormRecuperacao.jsx";
+import RecSenha from "./pages/Recuperação_Senha/FormRecuperacao";
 //import Home from "./pages/Home/app";
-import MenuLayout from "./pages/Tela_chatbot/app";
+import MenuLayout from "./pages/Tela_chatbot/FormLogin";
 
 const router = createBrowserRouter([
 
