@@ -1,7 +1,7 @@
 // Footer.js
 import React from "react";
 import "./app.css";
-import insta from "../../assets/insta.png";
+
 
 const Footer = () => {
   return (
