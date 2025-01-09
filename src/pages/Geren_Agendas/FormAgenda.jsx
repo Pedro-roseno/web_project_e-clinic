@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from "react";
-import { Container, Menu, Icon } from 'semantic-ui-react';
+import { Container, Menu, Icon,  Checkbox } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import logo from "../../assets/logo.png";
 import especialidades from "../../assets/especialidades.png";
@@ -12,9 +12,11 @@ import sair from "../../assets/sair.png";
 import "./Geren-Agenda.css";
 
 
+const Geren_Agendas = () =>   {
+  
+  const [tempo, setTempo] = useState();
 
-const Geren_Agendas = () =>   (
-
+return(
 
 
     <div style={{ display: 'flex', height: '100vh' }}>
@@ -95,19 +97,19 @@ const Geren_Agendas = () =>   (
     left: '50%',
     transform: 'translate(-50%, -50%)',
     display: 'flex',
-    flexDirection: 'column', // Organização em colunas
+    flexDirection: 'column', 
     alignItems: 'center',
-    gap: '2rem', // Espaçamento vertical entre as seções
+    gap: '2rem', 
   }}
 >
-  {/* Primeira linha */}
+  {       }
   <div
     style={{
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      gap: '1.5rem', // Espaçamento entre os elementos
+      gap: '1.5rem', 
     }}
   >
     <Icon size="big" name="filter" />
@@ -115,6 +117,7 @@ const Geren_Agendas = () =>   (
       <label style={{ color: 'white' }}>ID</label>
       <input
         id="input1"
+        name="id"
         type="text"
         placeholder="Ex: #000000"
         style={{
@@ -130,6 +133,7 @@ const Geren_Agendas = () =>   (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Data</label>
       <input
+       name="data"
         type="date"
         style={{
           padding: '0.5rem',
@@ -144,7 +148,10 @@ const Geren_Agendas = () =>   (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Hora</label>
       <input
+        name="hora"
         type="time"
+        value={tempo}
+        onChange={e => setTempo(e.target.value)}
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
@@ -152,8 +159,10 @@ const Geren_Agendas = () =>   (
           borderRadius: '4px',
           width: '200px',
         }}
+      
       />
     </div>
+
 
     <div
       style={{
@@ -161,17 +170,18 @@ const Geren_Agendas = () =>   (
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '1rem', // Espaçamento entre ícones
+        gap: '1rem', 
         marginLeft: '15px',
       }}
     >
+     
       <Icon size="big" name="add" />
       <Icon size="big" name="edit outline" />
       <Icon size="big" name="trash alternate outline" />
     </div>
   </div>
 
-  {/* Segunda linha */}
+  {      }
   <div
     style={{
       display: 'flex',
@@ -184,6 +194,7 @@ const Geren_Agendas = () =>   (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Médico</label>
       <input
+        name="medico"
         type="text"
         placeholder="Ex: Marcos"
         style={{
@@ -199,6 +210,7 @@ const Geren_Agendas = () =>   (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Especialidades</label>
       <select
+       name="especialidades"
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
@@ -217,6 +229,7 @@ const Geren_Agendas = () =>   (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Motivo da Consulta</label>
       <input
+       name="motivoconsulta"
         type="text"
         placeholder="Ex: obturação"
         style={{
@@ -230,7 +243,7 @@ const Geren_Agendas = () =>   (
     </div>
   </div>
 
-  {/* Terceira linha */}
+  {      }
   <div
     style={{
       display: 'flex',
@@ -243,6 +256,7 @@ const Geren_Agendas = () =>   (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Pacientes</label>
       <input
+       name="pacientes"
         type="text"
         placeholder="Ex: Nome"
         style={{
@@ -258,6 +272,7 @@ const Geren_Agendas = () =>   (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Status da Consulta</label>
       <select
+       name="status"
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
@@ -275,14 +290,13 @@ const Geren_Agendas = () =>   (
   </div>
 </div>
 
-
        
       </div>
     </div>
   
  
-    
+); 
  
     
-);
+};
 export default Geren_Agendas ;
