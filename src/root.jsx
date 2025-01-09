@@ -3,8 +3,14 @@ import RecSenha from "./pages/Recuperação_Senha/FormRecuperacao";
 //import Home from "./pages/Home/app";
 import MenuLayout from "./pages/Tela_chatbot/FormLogin";
 
-const router = createBrowserRouter([
+import Gerenagendamento from "./pages/Geren_Agendas/FormAgenda";
 
+const router = createBrowserRouter([
+  
+  {
+    path: "/Geren_Agendas",
+    element: <Gerenagendamento />,
+  },
   {
     path: "/recuperação_de_senha",
     element: <RecSenha />,
