@@ -1,7 +1,8 @@
-import React from 'react';
-import { useState } from "react";
-import { Container, Menu, Icon,  Checkbox } from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
+
+import React, { useEffect, useState } from "react";
+import { Container, Menu, Icon } from "semantic-ui-react";
+import axios from "axios";
+import "semantic-ui-css/semantic.min.css";
 import logo from "../../assets/logo.png";
 import especialidades from "../../assets/especialidades.png";
 import medicos from "../../assets/medicos.png";
@@ -11,84 +12,233 @@ import sair from "../../assets/sair.png";
 
 import "./Geren-Agenda.css";
 
-
-const Geren_Agendas = () =>   {
-  
-  const [tempo, setTempo] = useState();
-
-return(
+const Geren_Agendas = () => {
 
 
-    <div style={{ display: 'flex', height: '100vh' }}>
+  const [id, setId] = useState('');
+  const [data, setData] = useState('');
+  const [tempo, setTempo] = useState('');
+  const [nomemedico, setNomeMedico] = useState('');
+  const [especialidade, setEspecialidade] = useState('');
+  const [motivo, setMotivo] = useState('');
+  const [nomepaciente, setNomepaciente] = useState('');
+  const [statusconsul, setStatusConsul] = useState('');
+  const [state, setState] = useState(' '); 
+  const idagenda = state?.id; 
 
-    <div
-      style={{
-        width: '250px',
-        backgroundColor: 'white',
-        boxShadow: '2px 0 5px rgba(0, 0, 0, 0.1)',
-        padding: '1rem',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'start',
-      }}
-    >
+
+  function formatarData(data) {
+    const dataObj = new Date(data);
+    return dataObj.toLocaleDateString("pt-BR");
+  }
+
+  function salvarAgenda() {
+    const agendamento = {
+      id,
+      data,
+      tempo,
+      nomemedico,
+      especialidade,
+      motivo,
+      nomepaciente,
+      statusconsul,
+    };
+
+    if (id) {
+      axios
+        .put(`http://localhost:8080/api/agendamento/${id}`, agendamento)
+        .then(() => {
+          console.log("Agenda atualizada com sucesso.");
+          limparCampos();
+        })
+        .catch(() => {
+          console.error("Erro ao atualizar a agenda.");
+        });
+    } else {
+      axios
+        .post("http://localhost:8080/api/agendamento", agendamento)
+        .then(() => {
+          console.log("Agenda criada com sucesso.");
+          limparCampos();
+        })
+        .catch(() => {
+          console.error("Erro ao criar a agenda.");
+        });
+    }
+  }
+
+  function limparCampos() {
+    setId("");
+    setData("");
+    setTempo("");
+    setNomeMedico("");
+    setEspecialidade("");
+    setMotivo("");
+    setNomepaciente("");
+    setStatusConsul("");
+  }
+
+  function adicionarAgenda() {
+    limparCampos();
+    console.log("Preparando para adicionar uma nova agenda.");
+  }
+
+  function editarAgenda() {
+    if (!id) {
+      alert("Selecione uma agenda para editar.");
+      return;
+    }
+    salvarAgenda();
+  }
+
+  function excluirAgenda() {
+    if (!id) {
+      alert("Selecione uma agenda para excluir.");
+      return;
+    }
+    axios
+      .delete(`http://localhost:8080/api/agendamento/${id}`)
+      .then(() => {
+        console.log("Agenda excluída com sucesso.");
+        limparCampos(); 
+      })
+      .catch(() => {
+        console.error("Erro ao excluir a agenda.");
+      });
+  }
+
+
+
+  return (
+    <div style={{ display: "flex", height: "100vh" }}>
       <div
         style={{
-          fontWeight: 'bold',
-          fontSize: '1.5rem',
-          marginBottom: '2rem',
+          width: "250px",
+          backgroundColor: "white",
+          boxShadow: "2px 0 5px rgba(0, 0, 0, 0.1)",
+          padding: "1rem",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "start",
         }}
       >
-        Menu
+        <div
+          style={{
+            fontWeight: "bold",
+            fontSize: "1.5rem",
+            marginBottom: "2rem",
+          }}
+        >
+          Menu
+        </div>
+
+        <img src={logo} style={{ width: "200px", height: "200px" }} />
+
+        <div
+          style={{
+            marginBottom: "3rem",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            marginTop: "20px",
+          }}
+        >
+          <img
+            src={especialidades}
+            style={{ width: "30px", height: "30px", marginRight: "0.5rem" }}
+          />
+          <a href="//">Especialidades</a>
+        </div>
+
+        <div
+          style={{
+            marginBottom: "3rem",
+            cursor: "pointer",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={medicos}
+            style={{ width: "30px", height: "30px", marginRight: "0.5rem" }}
+          />
+          <a href="http://">Médicos</a>
+        </div>
+
+        <div
+          style={{
+            marginBottom: "3rem",
+            cursor: "pointer",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={pacientes}
+            style={{ width: "30px", height: "30px", marginRight: "0.5rem" }}
+          />
+          <a href="http://">Pacientes</a>
+        </div>
+
+        <div
+          style={{
+            marginBottom: "3rem",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={consultas}
+            style={{ width: "30px", height: "30px", marginRight: "0.5rem" }}
+          />
+          <a href="http://">Consultas</a>
+        </div>
+
+        <div
+          style={{
+            marginTop: "auto",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={sair}
+            style={{ width: "30px", height: "30px", marginRight: "0.5rem" }}
+          />
+          <a href="http://"> Encerrar Sessão</a>
+        </div>
       </div>
 
-      <img  src={logo} style={{ width: '200px', height: '200px' }} />
+      <div style={{ flex: 1 }}>
+        <Menu fixed="top" style={{ backgroundColor: "#265BA7" }}>
+          <Container>
+            <div
+              style={{
+                color: "white",
+                fontSize: "3rem",
+                fontWeight: "bold",
+                marginRight: "10rem",
+                alignSelf: "center",
+              }}
+            >
+              eClinic+
+            </div>
+            <div
+              style={{
+                marginLeft: "auto",
+                color: "white",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Icon size="big" name="user circle" />
+              <span style={{ marginLeft: "0.5rem", fontSize: "1.2rem" }}>
+                Usuário
+              </span>
+            </div>
+          </Container>
+        </Menu>
 
-      <div style={{ marginBottom: '3rem', cursor: 'pointer', display: 'flex', alignItems: 'center' , marginTop: '20px' }}>
-        <img  src={especialidades}  style={{ width: '30px', height: '30px', marginRight: '0.5rem', }} /> <a href="//">Especialidades</a></div>
-
-      <div style={{ marginBottom: '3rem', cursor: 'pointer', alignItems: 'center' }}>
-      <img  src={medicos}    style={{ width: '30px', height: '30px', marginRight: '0.5rem' }} /> <a href="http://">Médicos</a> </div>
-
-      <div style={{ marginBottom: '3rem', cursor: 'pointer', alignItems: 'center' }}>
-      <img   src={pacientes} style={{ width: '30px', height: '30px', marginRight: '0.5rem' }} /> <a href="http://">Pacientes</a> </div>
-
-      <div style={{ marginBottom: '3rem', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-        <img  src={consultas} style={{ width: '30px', height: '30px', marginRight: '0.5rem' }} /> <a href="http://">Consultas</a> </div>
-
-      <div style={{ marginTop: 'auto', cursor: 'pointer' , display: 'flex', alignItems: 'center' }}>
-       <img  src={sair} style={{ width: '30px', height: '30px', marginRight: '0.5rem' }}  />  <a href="http://"> Encerrar Sessão</a>
-    
-      </div>
-    </div>
-
-    <div style={{ flex: 1 }}>
-      <Menu fixed="top" style={{ backgroundColor: '#265BA7' }}>
-        <Container>
-          <div
-            style={{
-              color: 'white',
-              fontSize: '3rem',
-              fontWeight: 'bold',
-              marginRight: '10rem',
-              alignSelf: 'center',
-            }}
-          >
-            eClinic+
-          </div>
-          <div
-            style={{
-              marginLeft: 'auto',
-              color: 'white',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <Icon size='big' name='user circle' />
-            <span style={{ marginLeft: '0.5rem', fontSize: '1.2rem' }}>Usuário</span>
-          </div>
-        </Container>
-      </Menu>
 
       <div
   style={{
@@ -120,6 +270,8 @@ return(
         name="id"
         type="text"
         placeholder="Ex: #000000"
+        value={id}
+        onChange={e => setId(e.target.value)}
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
@@ -133,8 +285,9 @@ return(
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Data</label>
       <input
-       name="data"
         type="date"
+        value={data}
+        onChange={e => setData(e.target.value)}
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
@@ -175,9 +328,9 @@ return(
       }}
     >
      
-      <Icon size="big" name="add" />
-      <Icon size="big" name="edit outline" />
-      <Icon size="big" name="trash alternate outline" />
+     <Icon size="big" name="add" onClick={adicionarAgenda} />
+  <Icon size="big" name="edit outline" onClick={editarAgenda} />
+  <Icon size="big" name="trash alternate outline" onClick={excluirAgenda} />
     </div>
   </div>
 
@@ -197,6 +350,8 @@ return(
         name="medico"
         type="text"
         placeholder="Ex: Marcos"
+        value={nomemedico}
+       onChange={e => setNomeMedico(e.target.value)}
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
@@ -210,7 +365,10 @@ return(
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Especialidades</label>
       <select
+       value={especialidade}
+       onChange={e => setEspecialidade(e.target.value)}
        name="especialidades"
+
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
@@ -232,6 +390,8 @@ return(
        name="motivoconsulta"
         type="text"
         placeholder="Ex: obturação"
+        value={motivo}
+        onChange={e => setMotivo(e.target.value)}
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
@@ -259,6 +419,8 @@ return(
        name="pacientes"
         type="text"
         placeholder="Ex: Nome"
+        value={nomepaciente}
+        onChange={e => setNomepaciente(e.target.value)}
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
@@ -273,6 +435,8 @@ return(
       <label style={{ color: 'white' }}>Status da Consulta</label>
       <select
        name="status"
+       value={statusconsul}
+       onChange={e => setStatusConsul(e.target.value)}
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
