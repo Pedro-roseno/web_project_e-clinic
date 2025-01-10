@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, Menu, Icon } from "semantic-ui-react";
 import axios from "axios";
 import "semantic-ui-css/semantic.min.css";
@@ -12,27 +12,33 @@ import sair from "../../assets/sair.png";
 
 import "./Geren-Agenda.css";
 
+
 const Geren_Agendas = () => {
 
 
-  const [id, setId] = useState('');
-  const [data, setData] = useState('');
-  const [tempo, setTempo] = useState('');
-  const [nomemedico, setNomeMedico] = useState('');
-  const [especialidade, setEspecialidade] = useState('');
-  const [motivo, setMotivo] = useState('');
-  const [nomepaciente, setNomepaciente] = useState('');
-  const [statusconsul, setStatusConsul] = useState('');
-  const [state, setState] = useState(' '); 
-  const idagenda = state?.id; 
 
 
-  function formatarData(data) {
-    const dataObj = new Date(data);
-    return dataObj.toLocaleDateString("pt-BR");
-  }
+  const [id, setId] = useState("");
+  const [data, setData] = useState("");
+  const [tempo, setTempo] = useState("");
+  const [nomemedico, setNomeMedico] = useState("");
+  const [especialidade, setEspecialidade] = useState("");
+  const [motivo, setMotivo] = useState("");
+  const [nomepaciente, setNomepaciente] = useState("");
+  const [statusconsul, setStatusConsul] = useState("");
+  const [isIdEnabled, setIsIdEnabled] = useState(false); 
+  
 
-  function salvarAgenda() {
+
+  const toggleIdInput = () => {
+    setIsIdEnabled(!isIdEnabled);
+    if (!isIdEnabled) {
+      setId(""); 
+    }
+  };
+
+
+  const salvarAgenda = () => {
     const agendamento = {
       id,
       data,
@@ -65,9 +71,9 @@ const Geren_Agendas = () => {
           console.error("Erro ao criar a agenda.");
         });
     }
-  }
+  };
 
-  function limparCampos() {
+  const limparCampos = () => {
     setId("");
     setData("");
     setTempo("");
@@ -76,22 +82,23 @@ const Geren_Agendas = () => {
     setMotivo("");
     setNomepaciente("");
     setStatusConsul("");
-  }
+    setIsIdEnabled(false);
+  };
 
-  function adicionarAgenda() {
+  const adicionarAgenda = () => {
     limparCampos();
     console.log("Preparando para adicionar uma nova agenda.");
-  }
+  };
 
-  function editarAgenda() {
+  const editarAgenda = () => {
     if (!id) {
       alert("Selecione uma agenda para editar.");
       return;
     }
     salvarAgenda();
-  }
+  };
 
-  function excluirAgenda() {
+  const excluirAgenda = () => {
     if (!id) {
       alert("Selecione uma agenda para excluir.");
       return;
@@ -100,15 +107,15 @@ const Geren_Agendas = () => {
       .delete(`http://localhost:8080/api/agendamento/${id}`)
       .then(() => {
         console.log("Agenda excluída com sucesso.");
-        limparCampos(); 
+        limparCampos();
       })
       .catch(() => {
         console.error("Erro ao excluir a agenda.");
       });
-  }
+  };
 
 
-
+  
   return (
     <div style={{ display: "flex", height: "100vh" }}>
       <div
@@ -252,7 +259,7 @@ const Geren_Agendas = () => {
     gap: '2rem', 
   }}
 >
-  {       }
+  
   <div
     style={{
       display: 'flex',
@@ -262,7 +269,20 @@ const Geren_Agendas = () => {
       gap: '1.5rem', 
     }}
   >
-    <Icon size="big" name="filter" />
+    <Icon size="big" name="filter"/>
+
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <label style={{ color: 'white' }}>
+      <input
+        type="checkbox"
+        checked={isIdEnabled}
+        onChange={toggleIdInput}
+        
+      />
+      Habilitar ID
+    </label>
+  </div>
+
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>ID</label>
       <input
@@ -272,12 +292,14 @@ const Geren_Agendas = () => {
         placeholder="Ex: #000000"
         value={id}
         onChange={e => setId(e.target.value)}
+        disabled={!isIdEnabled}
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
           border: '1px solid #ccc',
           borderRadius: '4px',
           width: '200px',
+          textAlign:'center',
         }}
       />
     </div>
@@ -294,6 +316,7 @@ const Geren_Agendas = () => {
           border: '1px solid #ccc',
           borderRadius: '4px',
           width: '200px',
+          textAlign:'center',
         }}
       />
     </div>
@@ -311,10 +334,36 @@ const Geren_Agendas = () => {
           border: '1px solid #ccc',
           borderRadius: '4px',
           width: '200px',
+          
         }}
       
       />
     </div>
+
+    
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <label style={{ color: 'white' }}>Especialidades</label>
+      <select
+       value={especialidade}
+       onChange={e => setEspecialidade(e.target.value)}
+       name="especialidades"
+
+        style={{
+          padding: '0.5rem',
+          fontSize: '1rem',
+          border: '1px solid #ccc',
+          borderRadius: '4px',
+          width: '200px',
+          textAlign:'center',
+        }}
+      >
+        <option>Selecione</option>
+        <option>Clínico</option>
+        <option>Dentista</option>
+        <option>Ortopedia</option>
+      </select>
+    </div>
+
 
 
     <div
@@ -334,7 +383,7 @@ const Geren_Agendas = () => {
     </div>
   </div>
 
-  {      }
+  
   <div
     style={{
       display: 'flex',
@@ -358,30 +407,9 @@ const Geren_Agendas = () => {
           border: '1px solid #ccc',
           borderRadius: '4px',
           width: '200px',
+          textAlign:'center',
         }}
       />
-    </div>
-
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <label style={{ color: 'white' }}>Especialidades</label>
-      <select
-       value={especialidade}
-       onChange={e => setEspecialidade(e.target.value)}
-       name="especialidades"
-
-        style={{
-          padding: '0.5rem',
-          fontSize: '1rem',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          width: '200px',
-        }}
-      >
-        <option>Selecione</option>
-        <option>Clínico</option>
-        <option>Dentista</option>
-        <option>Ortopedia</option>
-      </select>
     </div>
 
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -398,13 +426,13 @@ const Geren_Agendas = () => {
           border: '1px solid #ccc',
           borderRadius: '4px',
           width: '200px',
+          textAlign:'center',
         }}
       />
     </div>
-  </div>
 
-  {      }
-  <div
+
+    <div
     style={{
       display: 'flex',
       flexDirection: 'row',
@@ -427,10 +455,15 @@ const Geren_Agendas = () => {
           border: '1px solid #ccc',
           borderRadius: '4px',
           width: '200px',
+          textAlign:'center',
         }}
       />
     </div>
 
+  </div>
+
+  
+ 
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Status da Consulta</label>
       <select
@@ -443,6 +476,7 @@ const Geren_Agendas = () => {
           border: '1px solid #ccc',
           borderRadius: '4px',
           width: '200px',
+          textAlign:'center',
         }}
       >
         <option value="">Selecione</option>
