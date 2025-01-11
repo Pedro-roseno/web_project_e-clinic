@@ -16,16 +16,10 @@ import "./Geren-Agenda.css";
 const Geren_Agendas = () => {
 
 
-
-
   const [id, setId] = useState("");
-  const [data, setData] = useState("");
-  const [tempo, setTempo] = useState("");
+  const [dataoHra, setDataHora] = useState("");
   const [nomemedico, setNomeMedico] = useState("");
   const [especialidade, setEspecialidade] = useState("");
-  const [motivo, setMotivo] = useState("");
-  const [nomepaciente, setNomepaciente] = useState("");
-  const [statusconsul, setStatusConsul] = useState("");
   const [isIdEnabled, setIsIdEnabled] = useState(false); 
   
 
@@ -41,13 +35,10 @@ const Geren_Agendas = () => {
   const salvarAgenda = () => {
     const agendamento = {
       id,
-      data,
-      tempo,
+      datahora,
       nomemedico,
       especialidade,
-      motivo,
-      nomepaciente,
-      statusconsul,
+    
     };
 
     if (id) {
@@ -75,13 +66,9 @@ const Geren_Agendas = () => {
 
   const limparCampos = () => {
     setId("");
-    setData("");
-    setTempo("");
+    DataoHora("");
     setNomeMedico("");
     setEspecialidade("");
-    setMotivo("");
-    setNomepaciente("");
-    setStatusConsul("");
     setIsIdEnabled(false);
   };
 
@@ -250,7 +237,7 @@ const Geren_Agendas = () => {
       <div
   style={{
     position: 'relative',
-    top: '27%',
+    top: '24%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     display: 'flex',
@@ -271,17 +258,7 @@ const Geren_Agendas = () => {
   >
     <Icon size="big" name="filter"/>
 
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <label style={{ color: 'white' }}>
-      <input
-        type="checkbox"
-        checked={isIdEnabled}
-        onChange={toggleIdInput}
-        
-      />
-      Habilitar ID
-    </label>
-  </div>
+   
 
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>ID</label>
@@ -292,7 +269,6 @@ const Geren_Agendas = () => {
         placeholder="Ex: #000000"
         value={id}
         onChange={e => setId(e.target.value)}
-        disabled={!isIdEnabled}
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
@@ -305,11 +281,29 @@ const Geren_Agendas = () => {
     </div>
 
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <label style={{ color: 'white' }}>Data</label>
+  <label style={{ color: 'white' }}>Data e Hora</label>
+  <input
+    type="datetime-local"
+    value={dataoHra}
+    onChange={e => setDataHora(e.target.value)}
+    style={{
+      padding: '0.5rem',
+      fontSize: '1rem',
+      border: '1px solid #ccc',
+      borderRadius: '4px',
+      width: '200px',
+      textAlign: 'center',
+    }}
+  />
+</div>
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <label style={{ color: 'white' }}>Médico</label>
       <input
-        type="date"
-        value={data}
-        onChange={e => setData(e.target.value)}
+        name="medico"
+        type="text"
+        placeholder="Ex: Marcos"
+        value={nomemedico}
+       onChange={e => setNomeMedico(e.target.value)}
         style={{
           padding: '0.5rem',
           fontSize: '1rem',
@@ -320,26 +314,6 @@ const Geren_Agendas = () => {
         }}
       />
     </div>
-
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <label style={{ color: 'white' }}>Hora</label>
-      <input
-        name="hora"
-        type="time"
-        value={tempo}
-        onChange={e => setTempo(e.target.value)}
-        style={{
-          padding: '0.5rem',
-          fontSize: '1rem',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          width: '200px',
-          
-        }}
-      
-      />
-    </div>
-
     
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Especialidades</label>
@@ -393,43 +367,9 @@ const Geren_Agendas = () => {
       gap: '1.5rem',
     }}
   >
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <label style={{ color: 'white' }}>Médico</label>
-      <input
-        name="medico"
-        type="text"
-        placeholder="Ex: Marcos"
-        value={nomemedico}
-       onChange={e => setNomeMedico(e.target.value)}
-        style={{
-          padding: '0.5rem',
-          fontSize: '1rem',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          width: '200px',
-          textAlign:'center',
-        }}
-      />
-    </div>
+  
 
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <label style={{ color: 'white' }}>Motivo da Consulta</label>
-      <input
-       name="motivoconsulta"
-        type="text"
-        placeholder="Ex: obturação"
-        value={motivo}
-        onChange={e => setMotivo(e.target.value)}
-        style={{
-          padding: '0.5rem',
-          fontSize: '1rem',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          width: '200px',
-          textAlign:'center',
-        }}
-      />
-    </div>
+   
 
 
     <div
@@ -441,51 +381,25 @@ const Geren_Agendas = () => {
       gap: '1.5rem',
     }}
   >
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <label style={{ color: 'white' }}>Pacientes</label>
-      <input
-       name="pacientes"
-        type="text"
-        placeholder="Ex: Nome"
-        value={nomepaciente}
-        onChange={e => setNomepaciente(e.target.value)}
-        style={{
-          padding: '0.5rem',
-          fontSize: '1rem',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          width: '200px',
-          textAlign:'center',
-        }}
-      />
-    </div>
 
   </div>
 
   
  
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <label style={{ color: 'white' }}>Status da Consulta</label>
-      <select
-       name="status"
-       value={statusconsul}
-       onChange={e => setStatusConsul(e.target.value)}
-        style={{
-          padding: '0.5rem',
-          fontSize: '1rem',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          width: '200px',
-          textAlign:'center',
-        }}
-      >
-        <option value="">Selecione</option>
-        <option value="active">Marcada</option>
-        <option value="inactive">Pendente</option>
-        <option value="pending">Cancelada</option>
-      </select>
-    </div>
+   
   </div>
+  <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+  <label style={{ color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem', marginLeft: '16px' }}>
+    <input
+      type="checkbox"
+      checked={isIdEnabled}
+      onChange={toggleIdInput}
+      style={{ margin: 0 }}
+    />
+  </label>
+</div>
+
+
 </div>
 
        
