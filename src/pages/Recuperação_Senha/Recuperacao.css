@@ -64,6 +64,7 @@ input.input_area {
 #content_section_left > h1 {
   align-content: center;
   text-align: center;
+  margin-bottom:13px ;
 }
 
 #button_area {
@@ -81,22 +82,31 @@ input.input_area {
   color: #fff;
 }
 
-#password_advice_box {
 
+#content_section_rigth1 {
+  display: grid;
+  align-items: center;
+  
+}
+
+
+#password_advice_box1{
+  display: grid;
   height: 19vh;
   border-radius: 10px;
   padding-left: 30px;
   background-color: #265ba7;
-  width: auto;
+  width: 50%;
   position: left;
+  margin-right: 19px;
  
 
 }
 
-#content_section_rigth {
-  display: grid;
-  align-items: center;
+#p_area1{
+  color: #fff;
 }
+
 
 
 
@@ -159,21 +169,23 @@ input.input_area {
   #form_button{
     width: 100%;
   }
-#content_section_rigth{
+#content_section_rigth1{
   margin-bottom: 26px;
 
 }
-  #password_advice_box{
+  #password_advice_box1{
     width: 100%;
     font-size: 12px;
     text-align: left;
     height: auto;
     padding: 10px 20px;
     gap: 10px ;
+    margin-right: 19px;
+   
     
   }
 
-  #password_advice_box ul, li{
+  #password_advice_box1 ul, li{
    list-style: none;
    
   }
@@ -198,17 +210,18 @@ input.input_area {
     
     }
 
-  #password_advice_box{
+  #password_advice_box1{
     height: 19vh;
     width: 60vh;
+    margin-right: 19px;
     
   }
 
-  #password_advice_box , p{
+  #password_advice_box1 , p{
     font-size: 17px;
 
   }
-  #password_advice_box ,ul > li{
+  #password_advice_box1 ,ul > li{
     list-style: none;
     font-size: 15px;
     gap: 5px;
