@@ -280,22 +280,6 @@ const Geren_Agendas = () => {
       />
     </div>
 
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-  <label style={{ color: 'white' }}>Data e Hora</label>
-  <input
-    type="datetime-local"
-    value={dataoHra}
-    onChange={e => setDataHora(e.target.value)}
-    style={{
-      padding: '0.5rem',
-      fontSize: '1rem',
-      border: '1px solid #ccc',
-      borderRadius: '4px',
-      width: '200px',
-      textAlign: 'center',
-    }}
-  />
-</div>
   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <label style={{ color: 'white' }}>Médico</label>
       <input
@@ -337,6 +321,23 @@ const Geren_Agendas = () => {
         <option>Ortopedia</option>
       </select>
     </div>
+
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+  <label style={{ color: 'white' }}>Data e Hora</label>
+  <input
+    type="datetime-local"
+    value={dataoHra}
+    onChange={e => setDataHora(e.target.value)}
+    style={{
+      padding: '0.5rem',
+      fontSize: '1rem',
+      border: '1px solid #ccc',
+      borderRadius: '4px',
+      width: '200px',
+      textAlign: 'center',
+    }}
+  />
+</div>
 
 
 
@@ -388,17 +389,42 @@ const Geren_Agendas = () => {
  
    
   </div>
-  <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-  <label style={{ color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem', marginLeft: '16px' }}>
+
+  <div 
+  style={{ 
+    width: '100%', 
+    display: 'flex', 
+    justifyContent: 'flex-start', 
+    alignItems: 'center', 
+    gap: '1rem', 
+    marginLeft: '16px' 
+  }}
+>
+  <label style={{ display: 'flex', alignItems: 'center', gap: '3rem' }}>
     <input
       type="checkbox"
       checked={isIdEnabled}
       onChange={toggleIdInput}
-      style={{ margin: 0 }}
+      style={{ margin: '10px' }}
     />
+    <span style={{ color: 'white' }}></span>
   </label>
-</div>
 
+  <div 
+    style={{ 
+      display: 'flex', 
+      alignItems: 'center', 
+      gap: '12rem' ,
+      marginLeft:'5rem'
+      
+    }}
+  >
+    <p style={{ margin: 0, color: 'white'}}>ID</p>
+    <p style={{ margin: 0, color: 'white' }}>Médico</p>
+    <p style={{ margin: 0, color: 'white' }}>Especialidade</p>
+    <p style={{ margin: 0, color: 'white' }}>Data/Hora</p>
+  </div>
+</div>
 
 </div>
 
