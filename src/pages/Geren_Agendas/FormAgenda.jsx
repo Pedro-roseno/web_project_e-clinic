@@ -9,6 +9,7 @@ import medicos from "../../assets/medicos.png";
 import pacientes from "../../assets/pacientes.png";
 import consultas from "../../assets/consultas.png";
 import sair from "../../assets/sair.png";
+import info from "../../assets/info.png";
 
 import "./Geren-Agenda.css";
 
@@ -219,14 +220,14 @@ const Geren_Agendas = () => {
             </div>
             <div
               style={{
-                marginLeft: "auto",
+                marginLeft: "0",
                 color: "white",
                 display: "flex",
                 alignItems: "center",
               }}
             >
-              <Icon size="big" name="user circle" />
-              <span style={{ marginLeft: "0.5rem", fontSize: "1.2rem" }}>
+              <Icon size="big" name="user circle"/>
+              <span style={{ marginLeft: "0.5rem", fontSize: "1.2rem", gap: "1 rem" }}>
                 Usuário
               </span>
             </div>
@@ -237,7 +238,7 @@ const Geren_Agendas = () => {
       <div
   style={{
     position: 'relative',
-    top: '24%',
+    top: '20%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     display: 'flex',
@@ -349,6 +350,7 @@ const Geren_Agendas = () => {
         justifyContent: 'center',
         gap: '1rem', 
         marginLeft: '15px',
+        top: '15rem',
       }}
     >
      
@@ -397,15 +399,15 @@ const Geren_Agendas = () => {
     justifyContent: 'flex-start', 
     alignItems: 'center', 
     gap: '1rem', 
-    marginLeft: '16px' 
+    marginLeft: '11px' 
   }}
 >
-  <label style={{ display: 'flex', alignItems: 'center', gap: '3rem' }}>
+  <label style={{ display: 'flex', alignItems: 'center', gap: '2rem',marginLeft: "19rem" }}>
     <input
       type="checkbox"
       checked={isIdEnabled}
       onChange={toggleIdInput}
-      style={{ margin: '10px' }}
+    
     />
     <span style={{ color: 'white' }}></span>
   </label>
@@ -415,7 +417,7 @@ const Geren_Agendas = () => {
       display: 'flex', 
       alignItems: 'center', 
       gap: '12rem' ,
-      marginLeft:'5rem'
+      marginLeft:'9rem'
       
     }}
   >
@@ -423,6 +425,10 @@ const Geren_Agendas = () => {
     <p style={{ margin: 0, color: 'white' }}>Médico</p>
     <p style={{ margin: 0, color: 'white' }}>Especialidade</p>
     <p style={{ margin: 0, color: 'white' }}>Data/Hora</p>
+    <p style={{ margin: 0, color: 'white' }}>Detalhes</p>
+
+    
+
   </div>
 </div>
 
