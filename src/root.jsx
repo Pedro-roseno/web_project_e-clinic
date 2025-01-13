@@ -21,6 +21,10 @@ const router = createBrowserRouter([
     path: "/profile_edit",
     element: <ProfileEdit />,
   },
+  {
+    path: "/especialidades",
+    element: <Especialidades />,
+  },
 ]);
 
 export function Root() {
