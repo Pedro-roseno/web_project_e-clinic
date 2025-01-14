@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RecSenha from "./pages/Recuperação_Senha/FormRecuperacao";
-import MenuLayout from "./pages/Tela_chatbot/FormLogin";
+import RecSenha from "./pages/RecuperaçãodeSenha/FormRecuperacao";
+import MenuLayout from "./pages/Login/FormLogin";
 import Home from "./pages//Home/Home";
 import ProfileEdit from "./pages/EditProfile/EditProfile";
+import Especialidades from "./pages/Especialidades/Especialidades";
 
 const router = createBrowserRouter([
   {
@@ -10,11 +11,11 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/recuperação_de_senha",
+    path: "/recuperaçãodesenha",
     element: <RecSenha />,
   },
   {
-    path: "/chatbot",
+    path: "/Login",
     element: <MenuLayout />,
   },
   {

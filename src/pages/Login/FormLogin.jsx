@@ -39,7 +39,7 @@ const MenuLayout = () => (
        <p id="p_area2">Equipe eClinic+</p>
        </ul>
 
-        </div>s
+        </div>
       </div>
 
       <div id="area-baixo" >
