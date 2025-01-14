@@ -4,9 +4,13 @@ import RecSenha from "./pages/Recuperação_Senha/FormRecuperacao";
 import MenuLayout from "./pages/Tela_chatbot/FormLogin";
 
 import Gerenagendamento from "./pages/Geren_Agendas/FormAgenda";
+import  Detalhes  from "./components/Detalhes/Formdetalhes";
 
 const router = createBrowserRouter([
-  
+  {
+    path: "/Detalhes",
+    element: <Detalhes />,
+  },
   {
     path: "/Geren_Agendas",
     element: <Gerenagendamento />,
