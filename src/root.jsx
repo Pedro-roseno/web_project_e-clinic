@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const router = createBrowserRouter([
  
 import RecSenha from "./pages/RecuperaçãodeSenha/FormRecuperacao";
 import MenuLayout from "./pages/Login/FormLogin";
