@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #d3d3d3;
+  font-family: "Encode Sans Condensed", sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #24508a;
+  color: white;
+}
+
+.header .time,
+.header .title {
+  font-size: 1.2rem;
+}
+
+.header .close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 70%; 
+}
+
+.field label {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: black;
+  text-align: left; 
+}
+
+h5{
+    font-size: 17px;
+}
+
+.field textarea {
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%; 
+  height: 70px;
+  resize: none; 
+  background-color: white;
+}
