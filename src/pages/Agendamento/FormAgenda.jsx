@@ -14,7 +14,7 @@ import info from "../../assets/info.png";
 import "./Geren-Agenda.css";
 
 
-const Geren_Agendas = () => {
+const Gerenagendamento = () => {
 
 
   const [id, setId] = useState("");
@@ -205,40 +205,50 @@ const Geren_Agendas = () => {
       </div>
 
       <div style={{ flex: 1 }}>
-        <Menu fixed="top" style={{ backgroundColor: "#265BA7" }}>
-          <Container>
-            <div
-              style={{
-                color: "white",
-                fontSize: "3rem",
-                fontWeight: "bold",
-                marginRight: "10rem",
-                alignSelf: "center",
-              }}
-            >
-              eClinic+
-            </div>
-            <div
-              style={{
-                marginLeft: "0",
-                color: "white",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Icon size="big" name="user circle"/>
-              <span style={{ marginLeft: "0.5rem", fontSize: "1.2rem", gap: "1 rem" }}>
-                Usuário
-              </span>
-            </div>
-          </Container>
-        </Menu>
+  <Menu fixed="top" style={{ backgroundColor: "#265BA7" }}>
+    <Container style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+
+      <div
+        style={{
+          color: "white",
+          fontSize: "3rem",
+          fontWeight: "bold",
+          alignSelf: "center",
+        }}
+      >
+        eClinic+
+      </div>
+
+      
+      <div
+        style={{
+          color: "white",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        }}
+      >
+        <Icon size="big" name="user circle" />
+        <span
+          style={{
+            marginLeft: "0.5rem",
+            fontSize: "1.2rem",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Usuário
+        </span>
+      </div>
+    </Container>
+  </Menu>
+
+
 
 
       <div
   style={{
     position: 'relative',
-    top: '20%',
+    top: '30%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     display: 'flex',
@@ -427,7 +437,12 @@ const Geren_Agendas = () => {
     <p style={{ margin: 0, color: 'white' }}>Data/Hora</p>
     <p style={{ margin: 0, color: 'white' }}>Detalhes</p>
 
-    
+    <footer className="pagination">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <span>Mais</span>
+          </footer>
 
   </div>
 </div>
@@ -443,4 +458,4 @@ const Geren_Agendas = () => {
  
     
 };
-export default Geren_Agendas ;
+export default Gerenagendamento ;
