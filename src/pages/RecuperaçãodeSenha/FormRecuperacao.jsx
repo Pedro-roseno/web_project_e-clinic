@@ -79,9 +79,9 @@ function RecSenha() {
             </div>
 
           </div>
-          <div id="content_section_rigth">
-            <div id="password_advice_box">
-              <p id="p_area">Para sua segurança, crie uma senha com:</p>
+          <div id="content_section_rigth1">
+            <div id="password_advice_box1">
+              <p id="p_area1">Para sua segurança, crie uma senha com:</p>
               <ul>
                 <li>Pelo menos 8 caracteres.</li>
                 <li>Uma letra maiúscula e uma minúscula.</li>
