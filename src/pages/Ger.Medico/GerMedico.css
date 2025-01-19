@@ -1,0 +1,17 @@
+body {
+  background-color: #1A2D4E;
+  font-family: "Encode Sans Condensed", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.App {
+  text-align: center;
+}
