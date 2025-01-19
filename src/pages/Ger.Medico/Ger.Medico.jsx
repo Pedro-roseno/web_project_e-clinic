@@ -2,6 +2,8 @@ import "../../styles/global.css";
 import React from "react";
 import { Menu, Icon } from "semantic-ui-react";
 import 'semantic-ui-css/semantic.min.css';
+import './GerMedico.css';
+
 
 const GerMedico = () => (
   <div id="principal">
@@ -88,7 +90,7 @@ const GerMedico = () => (
       <div
         style={{
           position: 'fixed',
-          top: 64,
+          top: 55,
           left: 0,
           width: '250px',
           backgroundColor: 'white',
@@ -97,7 +99,7 @@ const GerMedico = () => (
           display: 'flex',
           flexDirection: "column",
           alignItems: "start",
-          height: '90vh',
+          height: '92vh',
           overflow: 'hidden',
         }} >
 

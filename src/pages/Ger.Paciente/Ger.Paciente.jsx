@@ -5,20 +5,20 @@ import 'semantic-ui-css/semantic.min.css';
 
 const GerPaciente = () => (
   <div id="principal">
-    <div id="navbar_area2">
-      <section id="navbar_section2">
-        <Menu id="nav2" borderless>
+  <div id="navbar_area2">
+    <section id="navbar_section2">
+      <Menu id="nav2" borderless>
           <h1>eClinic+</h1>
-          <Menu.Menu position="right">
-            <Menu.Item>
-              <Icon size='big' name='user circle' />
-              <span style={{ fontSize: '1.2rem', color: 'white' }}>
-                Usuário
-              </span>
-            </Menu.Item>
-          </Menu.Menu>
-        </Menu>
-      </section>
+        <Menu.Menu position="right">
+          <Menu.Item>
+            <Icon size="big" name="user circle" />
+            <span style={{ marginLeft: "1rem", fontSize: "1.2rem" }}>
+              Usuário
+            </span>
+          </Menu.Item>
+        </Menu.Menu>
+      </Menu>
+    </section>
 
       <div
         style={{
@@ -71,7 +71,7 @@ const GerPaciente = () => (
       <div
         style={{
           position: 'fixed',
-          top: 64,
+          top: 55,
           left: 0,
           width: '250px',
           backgroundColor: 'white',
@@ -80,7 +80,7 @@ const GerPaciente = () => (
           display: 'flex',
           flexDirection: "column",
           alignItems: "start",
-          height: '90vh',
+          height: '92vh',
           overflow: 'hidden',
         }} >
 
