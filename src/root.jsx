@@ -1,8 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
- 
 import RecSenha from "./pages/RecuperaçãodeSenha/FormRecuperacao";
-import MenuLayout from "./pages/Login/FormLogin";
+import ChatbotScreen from "./pages/Chatbot/chatbot";
 import Home from "./pages//Home/Home";
 import ProfileEdit from "./pages/EditProfile/EditProfile";
 import Especialidades from "./pages/Especialidades/Especialidades";
@@ -19,9 +18,9 @@ const router = createBrowserRouter([
   },
   {
     path: "/Login",
-    element: <MenuLayout />,
+    element: <ChatbotScreen />,
   },
-    {
+  {
     path: "/Agendamento",
     element: <Gerenagendamento />,
   },
@@ -33,7 +32,6 @@ const router = createBrowserRouter([
     path: "/especialidades",
     element: <Especialidades />,
   },
-
 ]);
 
 export function Root() {
