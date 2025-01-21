@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
+import { Link } from "react-router-dom";
 import image1 from "../../assets/consulta.png";
 import image2 from "../../assets/logo.png";
 import sobre from "../../assets/sobre.png";
@@ -36,7 +37,7 @@ const Home = () => {
               <li>Contato</li>
             </ul>
           </nav>
-          <button className="home-login-button">Iniciar atendimento</button>
+          <Link to={'/Login'}><button className="home-login-button">Iniciar atendimento</button></Link>
         </div>
       </header>
 
