@@ -2,20 +2,23 @@ import React from "react";
 import { Container, Menu, Input, Button, Icon } from "semantic-ui-react";
 import "./Especialidades.css";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Especialidades = () => {
   return (
     <div className="container">
       <aside className="sidebar">
         <div className="logo">
+        <Link to={'/'}>
           <img src={logo} alt="eClinic+" className="logo-img" />
+          </Link>
         </div>
         <nav className="menu">
           <ul>
-            <li><b>Especialidades</b></li>
-            <li>Médicos</li>
-            <li>Pacientes</li>
-            <li>Consultas</li>
+            <Link to={'/especialidades'}><li><b>Especialidades</b></li></Link>
+            <Link to={'/gerenciamentomedico'}><li>Médicos</li></Link>
+            <Link to={'/gerenciamentopaciente'}><li>Pacientes</li></Link>
+            {/* <li>Consultas</li> */}
             <li>Encerrar sessão</li>
           </ul>
         </nav>
