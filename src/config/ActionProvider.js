@@ -25,14 +25,43 @@ class ActionProvider {
   };
 
   // Lida com o cadastro de usuário
-  handleRegister = async () => {
-    const response = await registerUser("usuario@example.com", "senha123"); // Simula entrada do usuário
-    const message = this.createChatBotMessage(response.message);
+handleRegister = async (email, senha) => {
+  try {
+    // Chama a API para registrar o usuário
+    const response = await registerUser(email, senha);
+
+    // Verifica se o cadastro foi bem-sucedido
+    if (response.status === "success") {
+      const message = this.createChatBotMessage(
+        "Cadastro realizado com sucesso! Você já pode fazer login."
+      );
+      this.setState((prev) => ({
+        ...prev,
+        messages: [...prev.messages, message],
+      }));
+    } else {
+      // Exibe mensagem de erro retornada pelo backend
+      const message = this.createChatBotMessage(
+        response.message || "Houve um problema ao realizar o cadastro."
+      );
+      this.setState((prev) => ({
+        ...prev,
+        messages: [...prev.messages, message],
+      }));
+    }
+  } catch (error) {
+    // Lida com erros inesperados
+    console.error("Erro na API de Cadastro:", error);
+    const message = this.createChatBotMessage(
+      "Desculpe, ocorreu um erro ao tentar registrar. Tente novamente mais tarde."
+    );
     this.setState((prev) => ({
       ...prev,
       messages: [...prev.messages, message],
     }));
-  };
+  }
+};
+
 
   // Lida com o login
   handleLogin = async () => {
