@@ -1,176 +1,134 @@
-import "../../styles/global.css";
 import React from "react";
-import { Menu, Icon } from "semantic-ui-react";
-import 'semantic-ui-css/semantic.min.css';
-import './GerMedico.css';
+import { Container, Menu, Input, Button, Icon } from "semantic-ui-react";
+import "./GerMedico.css";
+import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
-
-const GerMedico = () => (
-  <div id="principal">
-    <div id="navbar_area2">
-      <section id="navbar_section2">
-        <Menu id="nav2" borderless>
-          <h1>eClinic+</h1>
-          <Menu.Menu position="right">
-            <Menu.Item>
-              <Icon size='big' name='user circle' />
-              <span style={{ fontSize: '1.2rem', color: 'white' }}>
-                Usuário
-              </span>
-            </Menu.Item>
-          </Menu.Menu>
-        </Menu>
-      </section>
-
-      <div
-        style={{
-          position: 'absolute',
-          top: '30%',
-          left: '60%',
-          transform: 'translate(-50%, -50%)',
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          gap: '1rem',
-        }}
-      >
-        {/* filtro */}
-        <Icon size='big' name='filter' />
-
-        {/* Campo ID abaixo */}
-        <label style={{ color: 'white' }}>ID</label>
-        <input
-          type='text'
-          placeholder='Ex: #000000'
-          style={{
-            padding: '0.5rem',
-            fontSize: '1rem',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-            width: '200px',
-          }}
-        />
-
-        {/* Campo nome do médico */}
-        <label style={{ color: 'white' }}>MÉDICO</label>
-        <input
-          type='text'
-          placeholder='Ex: Marcos'
-          style={{
-            padding: '0.5rem',
-            fontSize: '1rem',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-            width: '200px',
-          }}
-        />
-
-        {/* Escolher especialidades*/}
-        <label style={{ color: 'white' }}>ESPECIALIDADES</label>
-        <select
-          style={{
-            padding: '0.5rem',
-            fontSize: '1rem',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-            width: '200px',
-          }}
-        >
-          <option>Selecione</option>
-          <option>Clínico</option>
-          <option>Dentista</option>
-          <option>Ortopedia</option>
-        </select>
-        <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
-          <Icon size='big' name='add' /> {/* Adicionar */}
-          <Icon size='big' name='edit outline' /> {/* Fazer edições */}
-          <Icon size='big' name='trash alternate outline' /> {/* Limpar */}
+const GerMedico = () => {
+  return (
+    <div className="container">
+      <aside className="sidebar">
+        <div className="logo">
+          <Link to={'/'}>
+            <img src={logo} alt="eClinic+" className="logo-img" style={{ width: '150px', height: '150p' }} />
+          </Link>
         </div>
-      </div>
-      <div
-        style={{
-          position: 'fixed',
-          top: 55,
-          left: 0,
-          width: '250px',
-          backgroundColor: 'white',
-          boxShadow: "2px 0 5px rgba(0, 0, 0, 0.1)",
-          padding: "1rem",
-          display: 'flex',
-          flexDirection: "column",
-          alignItems: "start",
-          height: '92vh',
-          overflow: 'hidden',
-        }} >
+        <nav className="menu">
+          <ul>
+            <Link to={'/especialidades'}>
+              <li>
+                <img src='especialidades.png'style={{ width: '20px', height: '20px', marginRight: '0.5rem' }} />
+                Especialidades</li></Link>
+            <Link to={'/gerenciamentomedico'}><li>
+              <Icon name='user md' style={{ width: '20px', height: '20px', marginRight: '0.5rem' }} />
+              <b>Médicos</b></li></Link>
+            <Link to={'/gerenciamentopaciente'}><li>
+              <Icon name='user' style={{ width: '20px', height: '20px', marginRight: '0.5rem' }} />
+              Pacientes</li></Link>
+            {/* <li>Consultas</li> */}
+            <li>
+              <Icon size='big' name='sign-out' />
+              Encerrar sessão</li>
+          </ul>
+        </nav>
+      </aside>
 
-          {/* Abaixo,encontra-se a logo Eclinic+ e outras telas */}
+      <main className="main-content">
+        <header className="header">
+        <img src='usuarioicon.png'style={{ width: '25px', height: '25px', marginRight: '0.5rem' }} />
+          <div className="header-user">Usuário</div>
+        </header>
 
-        <img
-          src="ecliniclogo.png"
-          alt="Logo eClinic"
-          style={{ width: "200px", height: "200px" }}
-        />
-        <div
-          style={{
-            marginBottom: "3rem",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            color: "black"
-          }}>
-          <img
-            src="especialidades.png"
-            style={{ width: "30px", height: "30px", marginRight: "0.5rem" }}
-          />
-          Especialidades
-        </div>
+        <section className="content">
+          <div className="filter-bar">
 
-        <div
-          style={{
-            marginBottom: "3rem",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            color: "black"
-          }}
-        >
-          <Icon size="big" name="user md" style={{ marginRight: "0.5rem" }} />
-          Médicos
-        </div>
+            <Icon size='big' name='filter' />  {/* Ícone filtro */}
 
-        <div
-          style={{
-            marginBottom: "3rem",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            color: "black"
-          }}>
-          <Icon size="big" name="user" style={{ marginRight: "0.5rem" }} />
-          Pacientes
-        </div>
+            {/* Campo ID abaixo */}
+            <label style={{ color: 'white' }}>ID</label>
+            <input
+              type='text'
+              placeholder='Ex: #000000'
+              style={{
+                padding: '0.5rem',
+                fontSize: '1rem',
+                border: '1px solid #ccc',
+                borderRadius: '4px',
+                width: '200px',
+                marginRight: '1rem'
+              }} />
 
-        <div
-          style={{
-            marginBottom: "3rem",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            color: "black"
-          }}>
-          <img
-            src='consulta.png'
-            style={{ width: "30px", height: "30px", marginRight: "0.5rem" }} />
-          Consultas
-        </div>
+            {/* Campo Médico abaixo */}
+            <label style={{ color: 'white'}}>Médico</label>
+            <input
+              type='text'
+              placeholder='Ex: Marcos'
+              style={{
+                padding: '0.5rem',
+                fontSize: '1rem',
+                border: '1px solid #ccc',
+                borderRadius: '4px',
+                width: '200px',
+                marginRight: '1rem'
+              }} />
 
-        <div style={{ marginTop: 'auto', cursor: 'pointer', color: 'black' }}>
-          <Icon size='big' name='sign-out' />
-          Encerrar Sessão
-        </div>
-      </div>
+            {/* Selecionar especialidades abaixo */}
+            <label htmlFor="especialidade-select" style={{ color: 'white' }}>Especialidade:</label>
+            <select id="especialidade-select" style={{ borderRadius: '4px' }} >
+              <option>Selecione</option>
+              <option>Clínico</option>
+              <option>Dentista</option>
+              <option>Ortopedia</option>
+            </select>
+            <button className="add-button">+</button>
+            <button className="edit-button">✎</button>
+            <button className="delete-button">🗑️</button>
+          </div>
+
+          <table className="medico-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Médico</th>
+                <th>Especialidades</th>
+                <th>Detalhes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>#000000</td>
+                <td>Mário</td>
+                <td>Ortopedia</td>
+                <td><button className="details-button">ℹ️</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>#111111</td>
+                <td>Maria</td>
+                <td>Dentista</td>
+                <td><button className="details-button">ℹ️</button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" /></td>
+                <td>#222222</td>
+                <td>Eduarda</td>
+                <td>Clínico</td>
+                <td><button className="details-button">ℹ️</button></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <footer className="pagination">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <span>Mais</span>
+          </footer>
+        </section>
+      </main>
     </div>
-  </div>
-);
-
+  );
+};
 export default GerMedico;

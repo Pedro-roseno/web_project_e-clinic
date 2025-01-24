@@ -10,30 +10,42 @@ const Especialidades = () => {
       <aside className="sidebar">
         <div className="logo">
         <Link to={'/'}>
-          <img src={logo} alt="eClinic+" className="logo-img" />
+          <img src={logo} alt="eClinic+" className="logo-img" style={{ width: '150px', height: '150p' }} />
           </Link>
         </div>
         <nav className="menu">
           <ul>
-            <Link to={'/especialidades'}><li><b>Especialidades</b></li></Link>
-            <Link to={'/gerenciamentomedico'}><li>Médicos</li></Link>
-            <Link to={'/gerenciamentopaciente'}><li>Pacientes</li></Link>
+            <Link to={'/especialidades'}><li>
+            <img src='especialidades.png'style={{ width: '20px', height: '20px', marginRight: '0.5rem' }} />
+            <b>Especialidades</b></li></Link>
+            <Link to={'/gerenciamentomedico'}><li>
+            <Icon name='user md' style={{ width: '20px', height: '20px', marginRight: '0.5rem' }}/>
+            Médicos</li></Link>
+            <Link to={'/gerenciamentopaciente'}><li>
+            <Icon name='user' style={{ width: '20px', height: '20px', marginRight: '0.5rem' }} />
+            Pacientes</li></Link>
             {/* <li>Consultas</li> */}
-            <li>Encerrar sessão</li>
+            <li>
+            <Icon size='big' name='sign-out' />
+            Encerrar sessão</li>
           </ul>
         </nav>
       </aside>
 
       <main className="main-content">
         <header className="header">
-          <div className="header-user">Username</div>
+        <img src='usuarioicon.png'style={{ width: '25px', height: '25px', marginRight: '0.5rem' }} />
+          <div className="header-user">Usuário</div>
         </header>
 
         <section className="content">
           <div className="filter-bar">
-            <label htmlFor="especialidade-select">Especialidade:</label>
-            <select id="especialidade-select">
+            <label htmlFor="especialidade-select"  style={{ color: 'white' }}>Especialidade:</label>
+            <select id="especialidade-select" style={{ borderRadius: '4px' }}>
               <option>Selecione</option>
+              <option>Clínico</option>
+              <option>Dentista</option>
+              <option>Ortopedia</option>
             </select>
             <button className="add-button">+</button>
             <button className="edit-button">✎</button>
