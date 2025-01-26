@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./EditProfile.css";
-import Footer from "../../components/footer/app";
+import Footer from "../../components/Footer/Footer";
 import "../../styles/global.css";
 
 const EditProfile = () => {
