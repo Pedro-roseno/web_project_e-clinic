@@ -86,7 +86,7 @@
 }
 
 .home-nav-links li {
-  font-size: 18px;
+  font-size: 16px;
   position: relative; 
 }
 
@@ -102,7 +102,7 @@
   background-color: #0078d4;
   color: white;
   border: none;
-  font-size: 18px;
+  font-size: 16px;
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
@@ -242,7 +242,7 @@
 }
 
 .home-about-text h3 {
-  font-size: 60px;
+  font-size: 50px;
   font-weight: bold;
   color: #000;
   margin: 0;

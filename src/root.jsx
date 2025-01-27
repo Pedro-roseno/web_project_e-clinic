@@ -1,13 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import RecSenha from "./pages/RecuperaçãodeSenha/FormRecuperacao";
-import ChatbotScreen from "./pages/Chatbot/chatbot";
 import Home from "./pages//Home/Home";
 import ProfileEdit from "./pages/EditProfile/EditProfile";
 import Especialidades from "./pages/Especialidades/Especialidades";
 import GerMedico from "./pages/Ger.Medico/Ger.Medico";
 import GerPaciente from "./pages/Ger.Paciente/Ger.Paciente";
 import Gerenagendamento from "./pages/Agendamento/FormAgenda";
+import AdminConsultasViews from "./pages/AdminViews/AdminConsultasViews/AdminConsultasViews";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +19,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/Login",
-    element: <ChatbotScreen />,
+    element: <RecSenha />,
+  },
+  {
+    path: "/AdminConsultasViews",
+    element: <AdminConsultasViews />,
   },
   {
     path: "/Agendamento",
@@ -39,7 +42,6 @@ const router = createBrowserRouter([
     path: "/gerenciamentomedico",
     element: <GerMedico />,
   },
-
   {
     path: "/gerenciamentopaciente",
     element: <GerPaciente />,
