@@ -70,11 +70,11 @@ const Home = () => {
               </li>
             </ul>
           </nav>
-          <Link to={"/Login"}>
+          <a href="/chatbot.html" target="_blank" rel="noopener noreferrer">
             <button className="home-login-button">
               Iniciar Atendimento <FontAwesomeIcon icon={faLaptopMedical} className="icon-desktop" />
             </button>
-          </Link>
+          </a>
         </div>
       </header>
 

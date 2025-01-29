@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "../../../components/Footer/Footer";
-import Sidebar from "../../../components/Sidebar/Sidebar";
+//import Sidebar from "../../../components/Sidebar/Sidebar";
 import "./AdminConsultasViews.css";
 
 const AdminConsultasViews = () => {
