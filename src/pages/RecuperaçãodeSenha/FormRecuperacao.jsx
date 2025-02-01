@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Recuperacao.css";
 import "../../styles/global.css";
 import logo from "../../assets/logo.png";
-import Footer from "../../components/Footer/Footer";
+import { Footer } from "../../components/Footer/Footer";
 
 function RecSenha() {
   const [count, setCount] = useState(0);

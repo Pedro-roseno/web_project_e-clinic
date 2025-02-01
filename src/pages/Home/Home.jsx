@@ -9,7 +9,7 @@ import sobre from "../../assets/sobre.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp} from "@fortawesome/free-brands-svg-icons";
 import { faUserNurse, faHandHoldingMedical, faLaptopMedical, faRobot, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import Footer from "../../components/Footer/Footer";
+import { Footer } from "../../components/Footer/Footer";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

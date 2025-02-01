@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp, faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer className="footer-container">
       <div className="footer-grid">
@@ -63,4 +63,3 @@ const Footer = () => {
   );
 };
 
-export default Footer;

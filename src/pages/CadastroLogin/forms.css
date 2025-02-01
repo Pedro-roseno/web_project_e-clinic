@@ -1,0 +1,94 @@
+.forms-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    background: #003580;
+  }
+  
+  .forms-navbar {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background: #003580;
+  }
+  
+  .nav-icon {
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .forms-box {
+    display: grid;
+    place-items: center; 
+    height: 100%;
+  }
+  
+  .forms-form {
+    background: white;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 15px;
+  }
+  
+  .forms-form h2 {
+    margin-bottom: 10px;
+    color: #003580;
+  }
+  .form-grid {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .input-group {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    background: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .input-group input, .input-group select {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding-left: 10px;
+    width: 100%;
+  }
+  button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #003580;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background: #002460;
+  }
+  
+  .toggle-btn {
+    background: none;
+    color: #003580;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .toggle-btn:hover {
+    text-decoration: underline;
+  }
+  
