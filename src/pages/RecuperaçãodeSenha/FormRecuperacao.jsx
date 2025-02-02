@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import "./Recuperacao.css";
+import "./FormRecuperacao.css";
 import "../../styles/global.css";
 import logo from "../../assets/logo.png";
 import { Footer } from "../../components/Footer/Footer";
