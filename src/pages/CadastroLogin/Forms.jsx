@@ -1,9 +1,61 @@
 import React, { useState } from "react";
 import "./Forms.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import { faUser, faEnvelope, faLock, faArrowLeft, faHome, faIdCard } from "@fortawesome/free-solid-svg-icons";
 
 const Forms = () => {
+
+//   const { state } = useLocation();
+//   const [idCliente, setIdPaciente] = useState();
+
+//   useEffect(() => {
+//     if (state != null && state.id != null) {
+//         axios.get("http://localhost:8080/api/cliente/" + state.id)
+//         .then((response) => {
+//                     setIdPaciente(response.data.id)
+//                     setNomeCompleto(response.data.nomeCompleto)
+//                     setCpf(response.data.cpf)
+//                     setDataNascimento(formatarData(response.data.dataNascimento))
+//                     setEnderecoCidade(response.data.enderecoCidade)
+//                     setEnderecoUf(response.data.enderecoUf)
+//                     setSenha(response.data.senha)
+//         })
+//     }
+// }, [state])
+
+// const [nome, setNomeCompleto] = useState();
+// const [cpf, setCpf] = useState();
+// const [dataNascimento, setDataNascimento] = useState();
+// const [enderecoCidade, setEnderecoCidade] = useState();
+// const [enderecoUf, setEnderecoUf] = useState();
+// const [senha, setSenha] = useState();
+
+
+// function salvar() {
+
+//     let clienteRequest = {
+//         nome: nome,
+//         cpf: cpf,
+//         dataNascimento: dataNascimento,
+//         enderecoCidade: enderecoCidade,
+//         enderecoUf: enderecoUf,
+//         senha: senha,
+
+//     }
+
+//     if (idCliente != null) { //Alteração:
+//         axios.put("http://localhost:8080/api/pacientes" + idCliente, clienteRequest)
+//         .then((response) => { console.log('Cliente alterado com sucesso.') })
+//         .catch((error) => { console.log('Erro ao alter um cliente.') })
+//     } else { //Cadastro:
+//         axios.post("http://localhost:8080/api/pacientes", clienteRequest)
+//         .then((response) => { console.log('Cliente cadastrado com sucesso.') })
+//         .catch((error) => { console.log('Erro ao incluir o cliente.') })
+//     }
+// }
+
+
   const [isLogin, setIsLogin] = useState(true); 
 
   const toggleForm = () => {
@@ -13,8 +65,8 @@ const Forms = () => {
   return (
     <div className="forms-container">
       <nav className="forms-navbar">
-        <FontAwesomeIcon icon={faHome} className="nav-icon" />
-        <FontAwesomeIcon icon={faArrowLeft} className="nav-icon" />
+        <Link to={'/'}><FontAwesomeIcon icon={faHome} className="nav-icon" /></Link>
+        <Link to={'/'}><FontAwesomeIcon icon={faArrowLeft} className="nav-icon" /></Link>
       </nav>
 
 
@@ -26,7 +78,7 @@ const Forms = () => {
               <>
                 <div className="input-group">
                   <FontAwesomeIcon icon={faIdCard} />
-                  <input type="text" placeholder="CPF / CRM / CNPJ" required />
+                  <input type="text" placeholder="CPF" required />
                 </div>
                 <div className="input-group">
                   <FontAwesomeIcon icon={faUser} />
@@ -39,21 +91,16 @@ const Forms = () => {
               <input type="email" placeholder="Email" required />
             </div>
             <div className="input-group">
+              <input type="text" placeholder="Endereco UF" required />
+            </div>
+            <div className="input-group">
+            <i class="fa-brands fa-centercode"></i>
+              <input type="text" placeholder="Cidade" required />
+            </div>
+            <div className="input-group">
               <FontAwesomeIcon icon={faLock} />
               <input type="password" placeholder="Senha" required />
             </div>
-            {!isLogin && (
-              <div className="input-group">
-                <label>Gênero:</label>
-                <select required>
-                  <option value="">Selecione</option>
-                  <option value="masculino">Masculino</option>
-                  <option value="feminino">Feminino</option>
-                  <option value="outro">Outro</option>
-                  <option value="nao-informar">Prefiro não informar</option>
-                </select>
-              </div>
-            )}
             <button type="submit">{isLogin ? "Entrar" : "Cadastrar"}</button>
           </form>
           <button className="toggle-btn" onClick={toggleForm}>

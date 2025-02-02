@@ -70,18 +70,16 @@ const Home = () => {
               </li>
             </ul>
           </nav>
-          <a href="/chatbot.html" target="_blank" rel="noopener noreferrer">
+          <Link to={"/login"}>
             <button className="home-login-button">
-              Iniciar Atendimento <FontAwesomeIcon icon={faLaptopMedical} className="icon-desktop" />
+              Login <FontAwesomeIcon icon={faLaptopMedical} className="icon-desktop" />
             </button>
-          </a>
+            </Link>
         </div>
       </header>
 
       <div className="home-carousel">
-        <button className="home-carousel-button prev" onClick={prevSlide}>
-          &#8592;
-        </button>
+
         <div
           className="home-carousel-track"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -92,9 +90,7 @@ const Home = () => {
             </div>
           ))}
         </div>
-        <button className="home-carousel-button next" onClick={nextSlide}>
-          &#8594;
-        </button>
+        
         <div className="home-carousel-indicators">
           {slides.map((_, index) => (
             <span
