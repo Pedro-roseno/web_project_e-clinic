@@ -5,6 +5,7 @@ import ProfileEdit from "./pages/EditProfile/EditProfile";
 
 
 import Forms from "./pages/CadastroLogin/Forms";
+import Cadastro from "./pages/CadastroLogin/Cadastro";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/profile_edit",
     element: <ProfileEdit />,
+  },
+  {
+    path: "/cadastro",
+    element: <Cadastro />,
   },
 ]);
 
