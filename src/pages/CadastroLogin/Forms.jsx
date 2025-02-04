@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import pacienteService from "../../services/Paciente.service.ts";
+import AuthPacienteService from "../../services/AuthPaciente.service.ts";
 import "./Forms.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";
@@ -18,33 +19,27 @@ const Forms = () => {
 
   useEffect(() => {
     if (state != null && state.id != null) {
-      pacienteService.getById(state.id)
-        .then((response) => {
-          setIdPaciente(response.data.id);
-          setNomeCompleto(response.data.nomeCompleto);
-          setCpf(response.data.cpf);
-          setEmail(response.data.email);
-          setDataNascimento(formatarData(response.data.dataNascimento));
-          setEnderecoCidade(response.data.enderecoCidade);
-          setEnderecoUf(response.data.enderecoUf);
-          setSenha(response.data.senha);
-        });
+      pacienteService.getById(state.id).then((response) => {
+        setIdPaciente(response.data.id);
+        setNomeCompleto(response.data.nomeCompleto);
+        setCpf(response.data.cpf);
+        setEmail(response.data.email);
+        setDataNascimento(formatarData(response.data.dataNascimento));
+        setEnderecoCidade(response.data.enderecoCidade);
+        setEnderecoUf(response.data.enderecoUf);
+        setSenha(response.data.senha);
+      });
     }
   }, [state]);
 
   function formatarData(dataParam) {
-
-    if (dataParam === null || dataParam === '' || dataParam === undefined) {
-        return ''
+    if (dataParam === null || dataParam === "" || dataParam === undefined) {
+      return "";
     }
 
-    let arrayData = dataParam.split('-');
-    return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
+    let arrayData = dataParam.split("-");
+    return arrayData[2] + "/" + arrayData[1] + "/" + arrayData[0];
   }
-
-  // const [nomeCompleto, setNomeCompleto] = useState("");
-  // const [cpf, setCpf] = useState("");
-  // const [email, setEmail] = useState("");
 
   const [nomeCompleto, setNomeCompleto] = useState("");
   const [cpf, setCpf] = useState("");
@@ -54,7 +49,7 @@ const Forms = () => {
   const [enderecoUf, setEnderecoUf] = useState();
   const [senha, setSenha] = useState();
 
-  const salvar=(event) =>  {
+  const salvar = (event) => {
     event.preventDefault(); // Evita recarregar a página
     let clienteRequest = {
       nomeCompleto: nomeCompleto,
@@ -63,26 +58,45 @@ const Forms = () => {
       dataNascimento: dataNascimento,
       enderecoCidade: enderecoCidade,
       enderecoUf: enderecoUf,
-      senha: senha
+      senha: senha,
     };
-    
 
     // Cadastro:
-    pacienteService.create(clienteRequest)
+    pacienteService
+      .create(clienteRequest)
       .then((response) => {
         console.log("Cliente cadastrado com sucesso.");
       })
       .catch((error) => {
         console.log("Erro ao incluir o cliente.");
       });
-  }
-  const login=(event) =>  {
-    event.preventDefault(); // Evita recarregar a página
-    let clienteRequest = {
-      cpf: cpf,
-      senha: senha
-    };
-  }
+  };
+
+  // LOGIN:
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const Login = (event) => {
+    
+      event.preventDefault();
+
+      let authData = {
+        username,
+        password,
+      };
+
+      try {
+        const response = AuthPacienteService.login(authData);
+        console.log("Usuário autenticado com sucesso!", response);
+        // Aqui você pode redirecionar o usuário ou atualizar o estado
+      } catch (err) {
+        setError("Falha ao autenticar: " + err.message);
+      }
+    
+  };
+
   const [isLogin, setIsLogin] = useState(true);
 
   const toggleForm = () => {
@@ -103,20 +117,44 @@ const Forms = () => {
       <div className="forms-box">
         <div className="forms-form">
           <h2>{isLogin ? "Login" : "Cadastro"}</h2>
-          <form className="form-grid">
+          <form  className="form-grid">
+          {isLogin && (
+            <>
             <div className="input-group">
               <FontAwesomeIcon icon={faIdCard} />
               <input
-                value={cpf}
+                value={username}
                 type="text"
-                placeholder="CPF"
+                placeholder="Usuario"
                 required
-                onChange={(e) => setCpf(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
+            <div className="input-group">
+              <FontAwesomeIcon icon={faLock} />
+              <input
+                value={password}
+                type="password"
+                placeholder="Senha"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            </>
+            )}
 
             {!isLogin && (
               <>
+                <div className="input-group">
+                  <FontAwesomeIcon icon={faIdCard} />
+                  <input
+                    value={cpf}
+                    type="text"
+                    placeholder="CPF"
+                    required
+                    onChange={(e) => setCpf(e.target.value)}
+                  />
+                </div>
                 <div className="input-group">
                   <FontAwesomeIcon icon={faEnvelope} />
                   <input
@@ -167,20 +205,24 @@ const Forms = () => {
                     onChange={(e) => setDataNascimento(e.target.value)}
                   />
                 </div>
+                <div className="input-group">
+                  <FontAwesomeIcon icon={faLock} />
+                  <input
+                    value={senha}
+                    type="password"
+                    placeholder="Senha"
+                    required
+                    onChange={(e) => setSenha(e.target.value)}
+                  />
+                </div>
               </>
             )}
-            <div className="input-group">
-              <FontAwesomeIcon icon={faLock} />
-              <input
-                value={senha}
-                type="password"
-                placeholder="Senha"
-                required
-                onChange={(e) => setSenha(e.target.value)}
-              />
-            </div>
+            
 
-            <button onClick={(event) =>isLogin ? login():salvar(event)} type="submit">
+            <button
+              onClick={(event) => (isLogin ? Login(event) : salvar(event))}
+              type="submit"
+            >
               {isLogin ? "Entrar" : "Cadastrar"}
             </button>
           </form>
