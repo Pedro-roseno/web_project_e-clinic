@@ -13,9 +13,16 @@ import { MedicosViews } from "./pages/MedicoViews/MedicoConsultasViews/MedicoCon
 
 import { PacientesViews } from "./pages/PacientesViews/PacientesConsultasViews/PacientesConsultasViews";
 
-import { FormLogin } from "../src/pages/FormLogin/FormLogin";
-
 import { FormCadastro } from "./pages/FormCadastro/FormCadastro";
+
+import { FormLogin } from "./pages/FormLogin/FormLogin";
+
+
+import {Agendamento} from "./pages/Agendamento/FormAgendamento"
+
+import {Especialidade} from "./pages/Especialidade/FormEspecialidade"
+
+
 
 import { TestIcons } from "./components/ActionButtons/testicon";
 
@@ -76,6 +83,14 @@ const router = createBrowserRouter([
   {
     path: "/testicons",
     element: <TestIcons />,
+  },
+  {
+    path: "/agendamento",
+    element: < Agendamento/>,
+  },
+  {
+    path: "/Especialidade",
+    element: < Especialidade/>,
   },
 ]);
 
