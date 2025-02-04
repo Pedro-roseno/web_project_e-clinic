@@ -1,11 +1,11 @@
 import './MedicoConsultasViews.css';
-import { Navbar } from '../../components/Navbar/Navbar';
-import { Sidebar } from '../../components/Sidebar/Sidebar';
+import { Navbar } from '../../../components/Navbar/Navbar';
+import { Sidebar } from '../../../components/Sidebar/Sidebar';
 import React, { useState } from "react";
 
-export const AdminViews = () => {
+export const MedicosViews = () => {
   return (
-    <div className="admin-views-container">
+    <div className="medicos-views-container">
       <Navbar />
 
       <div className="content">
@@ -16,8 +16,7 @@ export const AdminViews = () => {
         </div>
         <div className="right-side">
         
-        <Outlet/>
-        
+        <h1>Medico Tela</h1>
         </div>
       </div>
     </div>
