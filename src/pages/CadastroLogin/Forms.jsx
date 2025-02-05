@@ -140,6 +140,7 @@ const Forms = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+              <p><Link to={'/recuperaçãodesenha'}>Esqueceu a senha?</Link></p>
             </>
             )}
 
