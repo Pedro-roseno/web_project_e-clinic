@@ -10,6 +10,7 @@ import {
   faHome,
   faIdCard,
 } from "@fortawesome/free-solid-svg-icons";
+import { notifyError, notifySuccess } from "../../utils/Util.js";
 import { Link, useLocation } from "react-router-dom";
 
 export const FormCadastro = () => {
@@ -64,10 +65,10 @@ export const FormCadastro = () => {
     pacienteService
       .create(clienteRequest)
       .then((response) => {
-        console.log("Cliente cadastrado com sucesso.");
+        notifySuccess("Cliente cadastrado com sucesso.");
       })
       .catch((error) => {
-        console.log("Erro ao incluir o cliente.");
+        notifyError("Erro ao incluir o cliente.");
       });
   };
 
@@ -83,8 +84,7 @@ export const FormCadastro = () => {
         <div className="cadastro-form">
           <h2>Cadastro</h2>
           <form className="form-grid">
-
-          <div className="input-group">
+            <div className="input-group">
               <FontAwesomeIcon icon={faIdCard} />
               <input
                 value={cpf}
@@ -160,7 +160,9 @@ export const FormCadastro = () => {
               />
             </div>
 
-            <button onClick={(event) => salvar(event)} type="submit">Cadastrar</button>
+            <button onClick={(event) => salvar(event)} type="submit">
+              Cadastrar
+            </button>
           </form>
           <Link to="/formLogin" className="toggle-btn">
             Já tem conta? Faça login

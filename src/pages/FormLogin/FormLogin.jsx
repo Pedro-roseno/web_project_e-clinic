@@ -5,6 +5,7 @@ import AuthPacienteService from "../../services/AuthPaciente.service.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faIdCard, faHome } from "@fortawesome/free-solid-svg-icons";
 import { Link, useLocation } from "react-router-dom";
+import { notifyError, notifySuccess } from "../../utils/Util.js";
 
 export const FormLogin = () => {
   const { state } = useLocation();
@@ -25,22 +26,21 @@ export const FormLogin = () => {
   const [error, setError] = useState("");
 
   const Login = (event) => {
-    
-      event.preventDefault();
+    event.preventDefault();
 
-      let authData = {
-        username,
-        password,
-      };
+    let authData = {
+      username,
+      password,
+    };
 
-      try {
-        const response = AuthPacienteService.login(authData);
-        console.log("Usuário autenticado com sucesso!", response);
-        // Aqui você pode redirecionar o usuário ou atualizar o estado
-      } catch (err) {
-        setError("Falha ao autenticar: " + err.message);
-      }
-    
+    try {
+      const response = AuthPacienteService.login(authData);
+      notifySuccess("Usuário autenticado com sucesso!", response);
+      // Aqui você pode redirecionar o usuário ou atualizar o estado
+    } catch (err) {
+      setError("Falha ao autenticar: " + err.message);
+      notifyError("Falha ao autenticar: " + err.message);
+    }
   };
 
   return (
