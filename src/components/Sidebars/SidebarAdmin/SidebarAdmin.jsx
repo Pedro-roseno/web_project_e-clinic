@@ -13,18 +13,18 @@ const SidebarAdmin = () => {
       </div>
       <nav className="sidebar-nav">
         <div className="sidebar-item">
-          <FontAwesomeIcon icon={faUserDoctor} />
-          <Link to="/adminViews/medicos">Médicos</Link>
+          
+          <Link to="/adminViews"><FontAwesomeIcon icon={faUserDoctor} /> Médicos</Link>
         </div>
 
         <div className="sidebar-item">
-          <FontAwesomeIcon icon={faCalendarAlt} />
-          <Link to="/adminViews/consultas">Consultas</Link>
+          
+          <Link to="/adminViews/consultas"><FontAwesomeIcon icon={faCalendarAlt} /> Consultas</Link>
         </div>
 
         <div className="sidebar-item">
-          <FontAwesomeIcon icon={faSignOutAlt} />
-          <Link to="/">Encerrar sessão</Link>
+          
+          <Link to="/"><FontAwesomeIcon icon={faSignOutAlt} /> Encerrar sessão</Link>
         </div>
       </nav>
     </div>

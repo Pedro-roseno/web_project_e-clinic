@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit,faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import profilePic from "../../assets/user.png"; 
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -23,6 +24,11 @@ export const Navbar = () => {
               <FontAwesomeIcon icon={faEdit} />
               <span>Editar Perfil</span>
             </div>
+            <Link to="/">
+            <div className="navbar-dropdown-item">
+            <span><FontAwesomeIcon icon={faSignOutAlt} /> Encerrar sessão</span>
+            </div>
+            </Link>
           </div>
         )}
       </div>
