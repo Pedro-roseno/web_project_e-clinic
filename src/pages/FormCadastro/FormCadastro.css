@@ -81,6 +81,7 @@ html, body {
   white-space: nowrap; 
   margin-right: 10px; 
   font-weight: bold;
+  color: #000;
 }
 
 .input-group select {

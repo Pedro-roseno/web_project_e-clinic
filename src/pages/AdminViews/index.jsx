@@ -1,24 +1,19 @@
-import './index.css'
+import './index.css';
 import { Navbar } from '../../components/Navbar/Navbar';
-import { Sidebar } from '../../components/Sidebar/Sidebar';
-import {Outlet} from 'react-router-dom';
+import SidebarAdmin from '../../components/Sidebars/SidebarAdmin/SidebarAdmin';
+import { Outlet } from 'react-router-dom';
 
- 
 export const AdminViews = () => {
   return (
     <div className="admin-views-container">
       <Navbar />
 
       <div className="content">
-      <div className="left-side">
-        
-        <Sidebar />
-  
+        <div className="left-side">
+          <SidebarAdmin /> 
         </div>
         <div className="right-side">
-        
-        <Outlet/>
-        
+          <Outlet />
         </div>
       </div>
     </div>

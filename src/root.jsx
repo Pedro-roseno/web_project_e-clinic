@@ -5,13 +5,13 @@ import ProfileEdit from "./pages/EditProfile/EditProfile";
 
 import {AdminViews} from "./pages/AdminViews/index";
 import {AdminConsultasViews} from "./pages/AdminViews/AdminConsultasViews/AdminConsultasViews";
-import {AdminEspecialidadesViews} from "./pages/AdminViews/AdminEspecialidadesViews/AdminEspecialidadesViews";
 import {AdminMedicosViews} from "./pages/AdminViews/AdminMedicosViews/AdminMedicosViews";
-import {AdminPacientesViews} from "./pages/AdminViews/AdminPacientesViews/AdminPacientesViews";
 
-import { MedicosViews } from "./pages/MedicoViews/MedicoConsultasViews/MedicoConsultasViews";
+import { MedicoViews } from "./pages/MedicoViews/index";
 
-import { PacientesViews } from "./pages/PacientesViews/PacientesConsultasViews/PacientesConsultasViews";
+
+import { PacienteViews } from "./pages/PacienteViews/index";
+
 
 import { FormCadastro } from "./pages/FormCadastro/FormCadastro";
 
@@ -43,30 +43,21 @@ const router = createBrowserRouter([
       {
         
         index: true,
-        element: <AdminEspecialidadesViews/>,
+        element: <AdminMedicosViews/>,
       },
       {
         path:"consultas",
         element: <AdminConsultasViews/>
       },
-      {
-        path:"medicos",
-        element: <AdminMedicosViews/>
-      },
-      {
-        path:"pacientes",
-        element: <AdminPacientesViews/>
-      },
-
     ]
   },
   {
     path: "/medicoViews",
-    element: <MedicosViews />,
+    element: <MedicoViews/>,
   },
   {
-    path: "/pacientesViews",
-    element: <PacientesViews />,
+    path: "/pacienteViews",
+    element: <PacienteViews/>,
   },
   {
     path: "/formLogin",
@@ -96,4 +87,4 @@ const router = createBrowserRouter([
 
 export function Root() {
   return <RouterProvider router={router} />;
-}
+} 

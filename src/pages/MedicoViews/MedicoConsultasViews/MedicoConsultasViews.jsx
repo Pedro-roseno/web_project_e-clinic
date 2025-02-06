@@ -1,25 +1,12 @@
 import './MedicoConsultasViews.css';
-import { Navbar } from '../../../components/Navbar/Navbar';
-import { Sidebar } from '../../../components/Sidebar/Sidebar';
-import React, { useState } from "react";
+import React from "react";
 
-export const MedicosViews = () => {
+export const MedicoConsultasViews = () => {
   return (
-    <div className="medicos-views-container">
-      <Navbar />
-
-      <div className="content">
-      <div className="left-side">
-        
-        <Sidebar />
-  
-        </div>
-        <div className="right-side">
-        
-        <h1>Medico Tela</h1>
-        </div>
-      </div>
+    <div className="medico-container">
+      <h1 className="medico-title">Consultas Agendadas</h1>
     </div>
   );
 };
+
 

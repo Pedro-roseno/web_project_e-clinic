@@ -1,28 +1,16 @@
-/* Layout principal da página */
-.admin-layout {
-    display: grid;
-    grid-template-columns: 250px 1fr; /* Sidebar ocupa 250px, restante para conteúdo */
-    height: 100vh; /* Altura total da tela */
-    overflow: hidden; /* Prevenir rolagem fora do conteúdo principal */
-  }
-  
-  /* Área principal: Navbar, conteúdo e Footer */
-  .admin-main {
-    display: grid;
-    grid-template-rows: auto 1fr auto; /* Navbar, conteúdo, Footer */
-    height: 100%;
-  }
-  
-  /* Área de conteúdo principal */
-  .admin-content {
-    padding: 20px;
-    background-color: #f8f9fa; /* Fundo claro */
-    overflow-y: auto; /* Permitir rolagem, caso necessário */
-  }
-  
-  /* Sidebar fixa */
-  .sidebar {
-    background-color: #ffffff; /* Cor de fundo da Sidebar */
-    border-right: 1px solid #ddd; /* Linha divisória à direita */
-  }
-  
+.admin-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.admin-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.action-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
