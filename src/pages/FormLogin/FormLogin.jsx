@@ -4,12 +4,13 @@ import pacienteService from "../../services/Paciente.service.ts";
 import AuthPacienteService from "../../services/AuthPaciente.service.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faIdCard, faHome } from "@fortawesome/free-solid-svg-icons";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { notifyError, notifySuccess } from "../../utils/Util.js";
 
 export const FormLogin = () => {
   const { state } = useLocation();
   const [idPaciente, setIdPaciente] = useState();
+  const history = useNavigate()
 
   useEffect(() => {
     if (state != null && state.id != null) {
@@ -41,6 +42,7 @@ export const FormLogin = () => {
       setError("Falha ao autenticar: " + err.message);
       notifyError("Falha ao autenticar: " + err.message);
     }
+    history('/pacienteViews')
   };
 
   return (

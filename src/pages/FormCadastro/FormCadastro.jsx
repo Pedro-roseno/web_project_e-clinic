@@ -11,11 +11,12 @@ import {
   faIdCard,
 } from "@fortawesome/free-solid-svg-icons";
 import { notifyError, notifySuccess } from "../../utils/Util.js";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const FormCadastro = () => {
   const { state } = useLocation();
   const [idPaciente, setIdPaciente] = useState();
+  const history = useNavigate()
 
   useEffect(() => {
     if (state != null && state.id != null) {
@@ -70,6 +71,8 @@ export const FormCadastro = () => {
       .catch((error) => {
         notifyError("Erro ao incluir o cliente.");
       });
+
+      history('/formLogin')
   };
 
   return (

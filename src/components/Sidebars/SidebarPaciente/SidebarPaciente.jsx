@@ -6,6 +6,7 @@ import logo from "../../../assets/logo.png";
 import ".././Sidebar.css";
 
 export const SidebarPaciente = () => {
+  
   return (
     <div className="sidebar-container">
       <div className="sidebar-logo">
@@ -14,7 +15,7 @@ export const SidebarPaciente = () => {
       <nav className="sidebar-nav">
         <div className="sidebar-item">
           <FontAwesomeIcon icon={faCalendarAlt} />
-          <Link to="/pacientesViews">Consultas</Link>
+          <Link to="/pacienteViews">Consultas</Link>
         </div>
 
         <div className="sidebar-item">
