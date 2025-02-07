@@ -69,7 +69,13 @@ export const FormCadastro = () => {
         notifySuccess("Cliente cadastrado com sucesso.");
       })
       .catch((error) => {
-        notifyError("Erro ao incluir o cliente.");
+        if(error.response.data.errors !=undefined){
+          for(let i = 0; i<error.response.data.errors.length; i++){
+            notifyError(error.response.data.errors[i].defaultMessage)
+          }
+        }else{
+          notifyError(error.response.data.message)
+        }
       });
 
       history('/formLogin')
