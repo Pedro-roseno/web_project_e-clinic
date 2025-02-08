@@ -4,6 +4,7 @@ import "./MedicoConsultasViews.css";
 
 export const MedicoConsultasViews = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false); // Modal de adicionar consulta
   const [consultas, setConsultas] = useState([]);
   const [consultaSelecionada, setConsultaSelecionada] = useState(null);
   const [data, setData] = useState("");
@@ -39,6 +40,7 @@ export const MedicoConsultasViews = () => {
   // Fechar o modal e resetar os campos
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setIsAddModalOpen(false);
     setConsultaSelecionada(null);
     setData("");
     setHorario("");
@@ -55,7 +57,7 @@ export const MedicoConsultasViews = () => {
     };
 
     try {
-      const response = await fetch(`http://localhost:8080/api/agendamento/${id}`, {
+      const response = await fetch(`http://localhost:8080/api/agendamento/${consultaSelecionada.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -77,14 +79,61 @@ export const MedicoConsultasViews = () => {
     }
   };
 
+  // Adicionar nova consulta
+  const handleAddConsulta = async () => {
+    if (!data || !horario) return; // Validar que os campos não estão vazios
+
+    const newConsulta = {
+      data,
+      horario,
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/api/agendamento", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newConsulta),
+      });
+
+      if (!response.ok) throw new Error("Erro ao adicionar consulta");
+      const addedConsulta = await response.json();
+      setConsultas((prevConsultas) => [...prevConsultas, addedConsulta]);
+      handleCloseModal();
+      console.log("Consulta adicionada com sucesso", addedConsulta);
+    } catch (error) {
+      console.error("Erro ao adicionar consulta:", error);
+    }
+  };
+
+  // Remover consulta
+  const handleDeleteConsulta = async (consultaId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/agendamento/${consultaId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) throw new Error("Erro ao remover consulta");
+      setConsultas((prevConsultas) =>
+        prevConsultas.filter((consulta) => consulta.id !== consultaId)
+      );
+      console.log("Consulta removida com sucesso");
+    } catch (error) {
+      console.error("Erro ao remover consulta:", error);
+    }
+  };
+
   return (
     <div className="medico-container">
       <h1 className="medico-title">Consultas Agendadas</h1>
 
       <div className="action-buttons-container">
         <ActionButtons
-          userType="medico"
-          onDelete={() => console.log("❌ Médico removendo consulta")}
+          userType="admin"
+          onAdd={() => setIsAddModalOpen(true)} // Abrir modal de adicionar
+          onEdit={() => console.log("✏ Admin editando consulta")} // Implementar lógica se necessário
+          onDelete={() => console.log("❌ Admin removendo consulta")} // Remover lógica
         />
       </div>
 
@@ -108,6 +157,7 @@ export const MedicoConsultasViews = () => {
                 <strong>Hora:</strong> {consulta.horario}
               </p>
               <button onClick={() => handleEditClick(consulta)}>Editar</button>
+              <button onClick={() => handleDeleteConsulta(consulta.id)}>Remover</button>
             </div>
           ))}
         </div>
@@ -140,9 +190,43 @@ export const MedicoConsultasViews = () => {
               <button
                 onClick={handleUpdateConsulta}
                 className="btn-confirm"
-                disabled={!data || !horario}
-              >
+                disabled={!data || !horario}>
                 Atualizar Consulta
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de Adicionar nova consulta */}
+      {isAddModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Adicionar Consulta</h2>
+
+            <label>Data da Consulta:</label>
+            <input
+              type="date"
+              value={data}
+              onChange={(e) => setData(e.target.value)}
+            />
+
+            <label>Horário:</label>
+            <input
+              type="time"
+              value={horario}
+              onChange={(e) => setHorario(e.target.value)}
+            />
+
+            <div className="modal-buttons">
+              <button onClick={handleCloseModal} className="btn-cancel">
+                Cancelar
+              </button>
+              <button
+                onClick={handleAddConsulta}
+                className="btn-confirm"
+                disabled={!data || !horario}>
+                Adicionar Consulta
               </button>
             </div>
           </div>
@@ -151,6 +235,8 @@ export const MedicoConsultasViews = () => {
     </div>
   );
 };
+
+
 
 
 
