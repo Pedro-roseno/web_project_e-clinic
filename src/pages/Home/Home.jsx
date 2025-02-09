@@ -8,7 +8,8 @@ import image3 from "../../assets/image3.jpg";
 import sobre from "../../assets/sobre.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp} from "@fortawesome/free-brands-svg-icons";
-import { faUserNurse, faHandHoldingMedical, faLaptopMedical, faRobot, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faUserNurse, faHandHoldingMedical, faRightToBracket, faRobot, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
 import { Footer } from "../../components/Footer/Footer";
 
 const Home = () => {
@@ -72,7 +73,7 @@ const Home = () => {
           </nav>
           <a href="./formLogin"  rel="noopener noreferrer">
             <button className="home-login-button">
-              Iniciar Atendimento <FontAwesomeIcon icon={faLaptopMedical} className="icon-desktop" />
+              Entrar <FontAwesomeIcon icon={faRightToBracket} className="icon-desktop" />
             </button>
           </a>
         </div>
@@ -123,7 +124,7 @@ const Home = () => {
             <h3>Entenda quem somos e por que existimos</h3>
             <p>
               A eClinic+ é uma plataforma inovadora que transforma a forma como você
-              acessa cuidados médicos. Por meio de um chatbot inteligente, oferecemos
+              acessa cuidados médicos. Por meio de uma plataforma digital, oferecemos
               teleconsultas médicas de forma prática, rápida e segura.
             </p>
           </div>
@@ -138,7 +139,7 @@ const Home = () => {
         <div className="home-facility-grid">
           <div className="home-facility-item">
             <FontAwesomeIcon icon={faRobot} className="icon-clipboard" />
-            <p>Agende sua consulta diretamente no chatbot.</p>
+            <p>Agende sua consulta diretamente na plataforma.</p>
           </div>
           <div className="home-facility-item">
             <FontAwesomeIcon icon={faUserNurse} className="icon-user" />

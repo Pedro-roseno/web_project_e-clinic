@@ -100,3 +100,22 @@ button:hover {
   margin-top: 10px;
   text-align: center;
 }
+
+/* Adicionando sombra leve nos inputs */
+.form-group input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: inset 0px -1px rgba(0,0,0,.05); /* Sombra leve */
+}
+
+/* Efeito hover nos labels */
+.form-group label:hover {
+  color: #007bff; /* Mesma cor do botão */
+}
+
+/* Espaçamento extra entre grupos (se necessário) */
+.inputs-wrapper > .form-group:not(:last-child) {
+  margin-bottom: calc(15px + var(--gap)); /* Usando variáveis CSS se disponível */
+}
+

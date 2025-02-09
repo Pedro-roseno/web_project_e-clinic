@@ -9,6 +9,9 @@ import {
   faArrowLeft,
   faHome,
   faIdCard,
+  faLocationDot,
+  faCity,
+  faCakeCandles
 } from "@fortawesome/free-solid-svg-icons";
 import { notifyError, notifySuccess } from "../../utils/Util.js";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -105,11 +108,11 @@ export const FormCadastro = () => {
             </div>
 
             <div className="input-group">
-              <FontAwesomeIcon icon={faEnvelope} />
+              <FontAwesomeIcon icon={faUser} />
               <input
                 value={nomeCompleto}
                 type="text"
-                placeholder="nome"
+                placeholder="Nome Completo"
                 required
                 onChange={(e) => setNomeCompleto(e.target.value)}
               />
@@ -127,17 +130,18 @@ export const FormCadastro = () => {
             </div>
 
             <div className="input-group">
+            <FontAwesomeIcon icon={faLocationDot} />
               <input
                 value={enderecoUf}
                 type="text"
-                placeholder="Endereco UF"
+                placeholder="Estado"
                 required
                 onChange={(e) => setEnderecoUf(e.target.value)}
               />
             </div>
 
             <div className="input-group">
-              <i class="fa-brands fa-centercode"></i>
+              <FontAwesomeIcon icon={faCity} />
               <input
                 value={enderecoCidade}
                 type="text"
@@ -148,7 +152,7 @@ export const FormCadastro = () => {
             </div>
 
             <div className="input-group">
-              <i class="fa-brands fa-centercode"></i>
+              <FontAwesomeIcon icon={faCakeCandles} />
               <input
                 value={dataNascimento}
                 type="text"
