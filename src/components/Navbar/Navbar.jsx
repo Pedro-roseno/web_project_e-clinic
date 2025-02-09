@@ -5,6 +5,7 @@ import { faEdit, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import profilePic from "../../assets/user.png";
 import { useNavigate } from "react-router-dom"; // Importando o useNavigate
 import axios from "axios"; // Importando o axios
+import { notifyError, notifySuccess } from "../../utils/Util";
 
 export const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -36,6 +37,7 @@ export const Navbar = () => {
   const handleLogout = () => {
     localStorage.clear(); // Limpa todo o localStorage
     navigate("/"); // Redireciona para a página de login ou qualquer outra página desejada
+    notifySuccess("Deslogado com sucesso!")
   };
 
   return (

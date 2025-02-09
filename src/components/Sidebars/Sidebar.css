@@ -30,6 +30,7 @@
     font-size: 18px;
     color: #333;
     transition: 0.3s;
+    cursor: pointer;
   }
   
   .sidebar-item:hover {
