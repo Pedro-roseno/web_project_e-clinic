@@ -12,7 +12,7 @@ export const SidebarPaciente = () => {
   const handleLogout = () => {
     localStorage.clear(); // Limpa todo o localStorage
     navigate("/"); // Redireciona para a página de login ou qualquer outra página desejada
-    notifySuccess("Usuário autenticado com sucesso!")
+    notifySuccess("Deslogado com sucesso!")
   };
   
   return (

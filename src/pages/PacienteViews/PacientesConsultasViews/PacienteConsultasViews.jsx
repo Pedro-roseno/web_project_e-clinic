@@ -87,7 +87,7 @@ export const PacienteConsultasViews = () => {
   // 🗓️ Função para agendar a consulta
   const handleAgendar = async () => {
     if (!cpf) {
-      console.error("CPF não encontrado no localStorage.");
+      console.error("CPF não encontrado.");
       return;
     }
 

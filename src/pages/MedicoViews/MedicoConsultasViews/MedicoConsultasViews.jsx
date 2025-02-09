@@ -1,233 +1,252 @@
 import React, { useState, useEffect } from "react";
 import ActionButtons from "../../../components/ActionButtons/ActionButtons";
+import axios from "axios";
 import "./MedicoConsultasViews.css";
 
 export const MedicoConsultasViews = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false); // Modal de adicionar consulta
-  const [consultas, setConsultas] = useState([]);
-  const [consultaSelecionada, setConsultaSelecionada] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal para confirmação de exclusão
+  const [especialidades, setEspecialidades] = useState([]);
+  const [idEspecialidade, setIdEspecialidade] = useState(null);
+  const [medicos, setMedicos] = useState([]);
+  const [idMedico, setIdMedico] = useState(null);
   const [data, setData] = useState("");
   const [horario, setHorario] = useState("");
-  const [loadingConsultas, setLoadingConsultas] = useState(true);
+  const [loadingMedicos, setLoadingMedicos] = useState(false);
+  const [consultas, setConsultas] = useState([]);
+  const [selectedConsultaId, setSelectedConsultaId] = useState(null); // ID da consulta selecionada para exclusão
 
-  // Buscar consultas agendadas para o médico
+  const cpf = localStorage.getItem("cpf");
+
+  // Buscar especialidades ao carregar o componente
   useEffect(() => {
+    const fetchEspecialidades = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/especialidade");
+        setEspecialidades(response.data);
+      } catch (error) {
+        console.error("Erro ao carregar especialidades:", error);
+      }
+    };
+    fetchEspecialidades();
+  }, []);
+
+  // Buscar médicos ao selecionar especialidade
+  useEffect(() => {
+    if (!idEspecialidade) return;
+
+    const fetchMedicos = async () => {
+      setLoadingMedicos(true);
+      try {
+        const response = await axios.get(`http://localhost:8080/api/medicos/especialidade/${idEspecialidade}`);
+        setMedicos(response.data);
+      } catch (error) {
+        console.error("Erro ao carregar médicos:", error);
+      } finally {
+        setLoadingMedicos(false);
+      }
+    };
+
+    fetchMedicos();
+  }, [idEspecialidade]);
+
+  // Buscar consultas ao carregar o componente
+  useEffect(() => {
+    if (!cpf) return;
+
     const fetchConsultas = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/agendamento");
-        if (!response.ok) throw new Error("Erro ao buscar consultas");
-        const data = await response.json();
-        setConsultas(data);
+        const response = await axios.get(`http://localhost:8080/api/agendamento/listarTodosPorCpf/${cpf}`);
+        setConsultas(response.data);
       } catch (error) {
         console.error("Erro ao carregar consultas:", error);
-      } finally {
-        setLoadingConsultas(false);
       }
     };
 
     fetchConsultas();
-  }, []);
+  }, [cpf]);
 
-  // Abrir o modal para editar a consulta
-  const handleEditClick = (consulta) => {
-    setConsultaSelecionada(consulta);
-    setData(consulta.data);
-    setHorario(consulta.horario);
+  const handleEspecialidadeChange = (e) => {
+    setIdEspecialidade(e.target.value);
+    setIdMedico(null);
+  };
+
+  const handleAddClick = () => {
     setIsModalOpen(true);
   };
 
-  // Fechar o modal e resetar os campos
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setIsAddModalOpen(false);
-    setConsultaSelecionada(null);
+    setIdEspecialidade(null);
+    setIdMedico(null);
     setData("");
     setHorario("");
+    setMedicos([]);
   };
 
-  // Atualizar a consulta
-  const handleUpdateConsulta = async () => {
-    if (!data || !horario) return; // Validar que os campos não estão vazios
-
-    const updatedConsulta = {
-      ...consultaSelecionada,
-      data,
-      horario,
-    };
-
-    try {
-      const response = await fetch(`http://localhost:8080/api/agendamento/${consultaSelecionada.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedConsulta),
-      });
-
-      if (!response.ok) throw new Error("Erro ao atualizar consulta");
-      const data = await response.json();
-      setConsultas((prevConsultas) =>
-        prevConsultas.map((consulta) =>
-          consulta.id === updatedConsulta.id ? data : consulta
-        )
-      );
-      handleCloseModal();
-      console.log("Consulta atualizada com sucesso", data);
-    } catch (error) {
-      console.error("Erro ao atualizar consulta:", error);
+  // 🗓️ Função para agendar a consulta
+  const handleAgendar = async () => {
+    if (!cpf) {
+      console.error("CPF não encontrado no localStorage.");
+      return;
     }
-  };
-
-  // Adicionar nova consulta
-  const handleAddConsulta = async () => {
-    if (!data || !horario) return; // Validar que os campos não estão vazios
-
-    const newConsulta = {
-      data,
-      horario,
-    };
 
     try {
-      const response = await fetch("http://localhost:8080/api/agendamento", {
+      // Buscar ID do paciente
+      const pacienteResponse = await fetch(`http://localhost:8080/api/pacientes/buscarPorCpf/${cpf}`);
+      if (!pacienteResponse.ok) throw new Error("Erro ao buscar paciente");
+
+      const pacienteData = await pacienteResponse.json();
+      const idPaciente = pacienteData.id;
+
+      // Converter data para o formato "dd/MM/yyyy"
+      const dataFormatada = data.split("-").reverse().join("/");
+
+      // Criar objeto de agendamento
+      const agendamentoData = {
+        idMedico: idMedico,
+        idEspecialidade,
+        idPaciente,
+        dataAgendamento: dataFormatada, // Data corrigida
+        horarioAgendamento: horario,
+      };
+
+      // Enviar requisição POST para agendar consulta
+      const agendamentoResponse = await fetch("http://localhost:8080/api/agendamento", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newConsulta),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(agendamentoData),
       });
 
-      if (!response.ok) throw new Error("Erro ao adicionar consulta");
-      const addedConsulta = await response.json();
-      setConsultas((prevConsultas) => [...prevConsultas, addedConsulta]);
+      if (!agendamentoResponse.ok) throw new Error("Erro ao agendar consulta");
+
+      console.log("🗓️ Consulta Agendada:", agendamentoData);
+      alert("Consulta agendada com sucesso!");
+
+      // Atualizar lista de consultas após agendar
+      setConsultas((prevConsultas) => [...prevConsultas, { ...agendamentoData, medico: { nomeCompleto: medicos.find(med => med.id == idMedico)?.nomeCompleto }, especialidade: { nome: especialidades.find(esp => esp.id == idEspecialidade)?.nome } }]);
+
       handleCloseModal();
-      console.log("Consulta adicionada com sucesso", addedConsulta);
     } catch (error) {
-      console.error("Erro ao adicionar consulta:", error);
+      console.error("Erro ao agendar consulta:", error);
+      alert("Falha ao agendar a consulta.");
     }
   };
 
-  // Remover consulta
-  const handleDeleteConsulta = async (consultaId) => {
-    try {
-      const response = await fetch(`http://localhost:8080/api/agendamento/${consultaId}`, {
-        method: "DELETE",
-      });
+  // Função para abrir o modal de confirmação de exclusão
+  const handleDeleteClick = (consultaId) => {
+    setSelectedConsultaId(consultaId);
+    setIsDeleteModalOpen(true);
+  };
 
-      if (!response.ok) throw new Error("Erro ao remover consulta");
-      setConsultas((prevConsultas) =>
-        prevConsultas.filter((consulta) => consulta.id !== consultaId)
-      );
-      console.log("Consulta removida com sucesso");
+  // Função para excluir a consulta
+  const handleDeleteConfirm = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:8080/api/agendamento/${selectedConsultaId}`);
+      if (response.status === 200) {
+        alert("Consulta cancelada com sucesso.");
+        setConsultas(consultas.filter(consulta => consulta.id !== selectedConsultaId));
+        setIsDeleteModalOpen(false);
+      }
     } catch (error) {
-      console.error("Erro ao remover consulta:", error);
+      console.error("Erro ao cancelar consulta:", error);
+      alert("Falha ao cancelar a consulta.");
     }
   };
 
   return (
-    <div className="medico-container">
-      <h1 className="medico-title">Consultas Agendadas</h1>
+    <div className="paciente-container">
+      <h1 className="paciente-title">Consultas Agendadas</h1>
 
-      <div className="action-buttons-container">
-        <ActionButtons
-          userType="admin"
-          onAdd={() => setIsAddModalOpen(true)} // Abrir modal de adicionar
-          onEdit={() => console.log("✏ Admin editando consulta")} // Implementar lógica se necessário
-          onDelete={() => console.log("❌ Admin removendo consulta")} // Remover lógica
-        />
+      
+
+      {/* Tabela de Consultas */}
+      <div className="consulta-table-container">
+        <table className="consulta-table">
+          <thead>
+            <tr>
+              <th>Paciente</th>
+              <th>Data</th>
+              <th>Horário</th>
+              <th>Link</th>
+              <th>Ações</th> {/* Coluna de ações */}
+            </tr>
+          </thead>
+          <tbody>
+  {consultas.length > 0 ? (
+    consultas.map((consulta) => (
+      <tr key={consulta.id}>
+        <td>{consulta.paciente.nomeCompleto}</td>
+        <td>{consulta.dataAgendmento ? consulta.dataAgendmento.split('-').reverse().join('/') : consulta.dataAgendmento}</td>
+        <td>{consulta.horarioAgendamento}</td>
+        <td><a href={consulta.medico.linkMeet}>{consulta.medico.linkMeet}</a></td>
+        <td>
+          <button className="btn-cancelar" onClick={() => handleDeleteClick(consulta.id)}>Cancelar</button>
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="6">Nenhuma consulta agendada.</td>
+    </tr>
+  )}
+</tbody>
+        </table>
       </div>
 
-      <p>Lista de consultas agendadas</p>
-
-      {loadingConsultas ? (
-        <p>Carregando consultas...</p>
-      ) : consultas.length === 0 ? (
-        <p>Nenhuma consulta agendada.</p>
-      ) : (
-        <div className="consultas-list">
-          {consultas.map((consulta) => (
-            <div key={consulta.id} className="consulta-item">
-              <p>
-                <strong>Paciente:</strong> {consulta.paciente.nome}
-              </p>
-              <p>
-                <strong>Data:</strong> {consulta.data}
-              </p>
-              <p>
-                <strong>Hora:</strong> {consulta.horario}
-              </p>
-              <button onClick={() => handleEditClick(consulta)}>Editar</button>
-              <button onClick={() => handleDeleteConsulta(consulta.id)}>Remover</button>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Modal para editar consulta */}
-      {isModalOpen && (
+      {/* Modal de Confirmação de Exclusão */}
+      {isDeleteModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2>Editar Consulta</h2>
-
-            <label>Data da Consulta:</label>
-            <input
-              type="date"
-              value={data}
-              onChange={(e) => setData(e.target.value)}
-            />
-
-            <label>Horário:</label>
-            <input
-              type="time"
-              value={horario}
-              onChange={(e) => setHorario(e.target.value)}
-            />
-
+            <h2>Confirmar Cancelamento</h2>
+            <p className="confirm-text" >Você tem certeza de que deseja cancelar esta consulta?</p>
             <div className="modal-buttons">
-              <button onClick={handleCloseModal} className="btn-cancel">
-                Cancelar
-              </button>
-              <button
-                onClick={handleUpdateConsulta}
-                className="btn-confirm"
-                disabled={!data || !horario}>
-                Atualizar Consulta
-              </button>
+              <button onClick={() => setIsDeleteModalOpen(false)} className="btn-cancel">Cancelar</button>
+              <button onClick={handleDeleteConfirm} className="btn-confirm">Confirmar</button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Modal de Adicionar nova consulta */}
-      {isAddModalOpen && (
+      {/* Modal de Agendamento */}
+      {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2>Adicionar Consulta</h2>
+            <h2>Agendar Consulta</h2>
+
+            <label>Especialidade:</label>
+            <select value={idEspecialidade || ""} onChange={handleEspecialidadeChange}>
+              <option value="">Selecione...</option>
+              {especialidades.map((esp) => (
+                <option key={esp.id} value={esp.id}>
+                  {esp.nome}
+                </option>
+              ))}
+            </select>
+
+            <label>Médico:</label>
+            <select value={idMedico || ""} onChange={(e) => setIdMedico(e.target.value)} disabled={!idEspecialidade || loadingMedicos}>
+              <option value="">Selecione...</option>
+              {loadingMedicos ? (
+                <option disabled>Carregando médicos...</option>
+              ) : (
+                medicos.map((med) => (
+                  <option key={med.id} value={med.id}>
+                    {med.nomeCompleto}
+                  </option>
+                ))
+              )}
+            </select>
 
             <label>Data da Consulta:</label>
-            <input
-              type="date"
-              value={data}
-              onChange={(e) => setData(e.target.value)}
-            />
+            <input type="date" value={data} onChange={(e) => setData(e.target.value)} />
 
             <label>Horário:</label>
-            <input
-              type="time"
-              value={horario}
-              onChange={(e) => setHorario(e.target.value)}
-            />
+            <input type="time" value={horario} onChange={(e) => setHorario(e.target.value)} />
 
             <div className="modal-buttons">
-              <button onClick={handleCloseModal} className="btn-cancel">
-                Cancelar
-              </button>
-              <button
-                onClick={handleAddConsulta}
-                className="btn-confirm"
-                disabled={!data || !horario}>
-                Adicionar Consulta
-              </button>
+              <button onClick={handleCloseModal} className="btn-cancel">Cancelar</button>
+              <button onClick={handleAgendar} className="btn-confirm" disabled={!idEspecialidade || !idMedico || !data || !horario}>Agendar Consulta</button>
             </div>
           </div>
         </div>
@@ -235,8 +254,3 @@ export const MedicoConsultasViews = () => {
     </div>
   );
 };
-
-
-
-
-
