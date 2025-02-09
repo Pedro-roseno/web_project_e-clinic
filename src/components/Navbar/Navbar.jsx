@@ -1,15 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit,faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import profilePic from "../../assets/user.png"; 
-import { Link } from "react-router-dom";
+import { faEdit, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import profilePic from "../../assets/user.png";
+import { useNavigate } from "react-router-dom"; // Importando o useNavigate
+import axios from "axios"; // Importando o axios
 
 export const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [nomePaciente, setNomePaciente] = useState("Carregando...");
+
+  const cpf = localStorage.getItem("cpf"); // Pegando o CPF armazenado
+  const navigate = useNavigate(); // Hook para navegação
+
+  useEffect(() => {
+    if (cpf) {
+      axios
+        .get(`http://localhost:8080/api/pacientes/buscarPorCpf/${cpf}`)
+        .then((response) => {
+          setNomePaciente(response.data.nomeCompleto); // Atualiza o nome do paciente
+        })
+        .catch((error) => {
+          console.error("Erro ao buscar paciente:", error);
+          setNomePaciente("Usuário");
+        });
+    } else {
+      setNomePaciente("Usuário");
+    }
+  }, [cpf]); // Executa a requisição quando o CPF estiver disponível
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear(); // Limpa todo o localStorage
+    navigate("/"); // Redireciona para a página de login ou qualquer outra página desejada
   };
 
   return (
@@ -17,18 +43,17 @@ export const Navbar = () => {
       <h1 className="navbar-title">eClinic+</h1>
       <div className="navbar-profile" onClick={toggleDropdown}>
         <img src={profilePic} alt="Perfil" className="navbar-profile-pic" />
-        <span className="navbar-username">Username</span>
+        <span className="navbar-username">{nomePaciente}</span>
         {dropdownOpen && (
           <div className="navbar-dropdown">
             <div className="navbar-dropdown-item">
               <FontAwesomeIcon icon={faEdit} />
               <span>Editar Perfil</span>
             </div>
-            <Link to="/">
-            <div className="navbar-dropdown-item">
-            <span><FontAwesomeIcon icon={faSignOutAlt} /> Encerrar sessão</span>
+            <div className="navbar-dropdown-item" onClick={handleLogout}>
+              <FontAwesomeIcon icon={faSignOutAlt} />
+              <span>Encerrar sessão</span>
             </div>
-            </Link>
           </div>
         )}
       </div>

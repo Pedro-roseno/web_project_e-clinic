@@ -26,7 +26,7 @@ export const FormLogin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const Login = (event) => {
+  const  Login = async (event) => {
     event.preventDefault();
 
     let authData = {
@@ -35,8 +35,9 @@ export const FormLogin = () => {
     };
 
     try {
-      const response = AuthPacienteService.login(authData);
+      const response = await AuthPacienteService.login(authData);
       notifySuccess("Usuário autenticado com sucesso!", response);
+      localStorage.setItem("cpf", response.username)
       // Aqui você pode redirecionar o usuário ou atualizar o estado
     } catch (err) {
       setError("Falha ao autenticar: " + err.message);

@@ -1,5 +1,33 @@
-.action-icon {
-    color: white;
-    font-size: 1.2rem; /* Ajuste conforme necessário */
-  }
-  
+/* Estilo para o botão de adicionar agendamento com mais destaque e tamanho maior */
+.add-button {
+  background-color: #007bff; /* Cor de fundo azul para destaque */
+  color: white; /* Cor do texto */
+  border: none; /* Remove a borda */
+  padding: 20px 40px; /* Aumenta o espaçamento interno para um botão mais largo */
+  font-size: 24px; /* Aumenta o tamanho da fonte */
+  border-radius: 15px; /* Bordas mais arredondadas */
+  cursor: pointer; /* Cursor de clique */
+  display: flex; /* Alinha o ícone e texto horizontalmente */
+  align-items: center; /* Alinha o ícone verticalmente no centro */
+  justify-content: center; /* Centraliza o texto e ícone */
+  transition: all 0.3s ease; /* Transição suave para todos os efeitos */
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5); /* Sombra para dar profundidade */
+  width: 300px; /* Largura maior para o botão */
+  margin: 30px auto; /* Centraliza o botão na tela e adiciona espaçamento */
+}
+
+.add-button:hover {
+  background-color: #0056b3; /* Cor de fundo mais escura ao passar o mouse */
+  transform: scale(1.1); /* Aumenta o tamanho do botão ao passar o mouse */
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.7); /* Sombra mais forte ao passar o mouse */
+}
+
+.add-button:focus {
+  outline: none; /* Remove o contorno quando o botão está em foco */
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.8); /* Sombra intensa para destacar quando em foco */
+}
+
+.add-button .action-icon {
+  margin-right: 15px; /* Aumenta o espaço entre o ícone e o texto */
+  font-size: 28px; /* Aumenta o tamanho do ícone */
+}
