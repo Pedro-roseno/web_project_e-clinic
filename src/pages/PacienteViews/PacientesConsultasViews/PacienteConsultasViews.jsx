@@ -122,7 +122,7 @@ export const PacienteConsultasViews = () => {
 
       console.log("🗓️ Consulta Agendada:", agendamentoData);
       alert("Consulta agendada com sucesso!");
-
+      window.location.reload();
       // Atualizar lista de consultas após agendar
       setConsultas((prevConsultas) => [...prevConsultas, { ...agendamentoData, medico: { nomeCompleto: medicos.find(med => med.id == idMedico)?.nomeCompleto }, especialidade: { nome: especialidades.find(esp => esp.id == idEspecialidade)?.nome } }]);
 
