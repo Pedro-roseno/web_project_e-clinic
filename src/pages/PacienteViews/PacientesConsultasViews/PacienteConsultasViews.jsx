@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ActionButtons from "../../../components/ActionButtons/ActionButtons";
 import axios from "axios";
 import "./PacienteConsultasViews.css";
-
+import { notifyError, notifySuccess } from "../../../utils/Util.js";
 export const PacienteConsultasViews = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal para confirmação de exclusão
@@ -31,7 +31,7 @@ export const PacienteConsultasViews = () => {
     fetchEspecialidades();
   }, []);
 
-  // Buscar médicos ao selecionar especialidade
+  
   useEffect(() => {
     if (!idEspecialidade) return;
 
@@ -90,48 +90,80 @@ export const PacienteConsultasViews = () => {
       console.error("CPF não encontrado.");
       return;
     }
-
+  
     try {
-      // Buscar ID do paciente
       const pacienteResponse = await fetch(`http://localhost:8080/api/pacientes/buscarPorCpf/${cpf}`);
       if (!pacienteResponse.ok) throw new Error("Erro ao buscar paciente");
-
+  
+      
+      let conflitoDeHorario = false;
+  
+     
+      for (let i = 0; i < consultas.length; i++) {
+        const con = consultas[i];
+        if (con.dataAgendmento === data) {
+        
+          const [horaConsulta, minutoConsulta] = con.horarioAgendamento.split(":").map(Number);
+          const [horaNova, minutoNova] = horario.split(":").map(Number);
+  
+          const diffHora = Math.abs(horaNova - horaConsulta);
+          const diffMinuto = Math.abs(minutoNova - minutoConsulta);
+          const diffTotal = diffHora * 60 + diffMinuto;
+  
+          
+          if (diffTotal < 60) {
+            console.log("Conflito de horário detectado");
+            notifyError("Você já tem uma consulta agendada com um intervalo menor que uma hora. Agende para outro horário.");
+            conflitoDeHorario = true; 
+            break; 
+          }
+        }
+      }
+  
+      if (conflitoDeHorario) {
+        return; 
+      }
+  
       const pacienteData = await pacienteResponse.json();
       const idPaciente = pacienteData.id;
-
-      // Converter data para o formato "dd/MM/yyyy"
+  
       const dataFormatada = data.split("-").reverse().join("/");
-
-      // Criar objeto de agendamento
+  
       const agendamentoData = {
         idMedico: idMedico,
         idEspecialidade,
         idPaciente,
-        dataAgendamento: dataFormatada, // Data corrigida
+        dataAgendamento: dataFormatada,
         horarioAgendamento: horario,
       };
-
-      // Enviar requisição POST para agendar consulta
+  
       const agendamentoResponse = await fetch("http://localhost:8080/api/agendamento", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(agendamentoData),
       });
-
+  
       if (!agendamentoResponse.ok) throw new Error("Erro ao agendar consulta");
-
+  
       console.log("🗓️ Consulta Agendada:", agendamentoData);
-      alert("Consulta agendada com sucesso!");
-      window.location.reload();
+      
+      notifySuccess('Agendamento feito com sucesso.')
+      
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+      
       // Atualizar lista de consultas após agendar
       setConsultas((prevConsultas) => [...prevConsultas, { ...agendamentoData, medico: { nomeCompleto: medicos.find(med => med.id == idMedico)?.nomeCompleto }, especialidade: { nome: especialidades.find(esp => esp.id == idEspecialidade)?.nome } }]);
 
       handleCloseModal();
     } catch (error) {
       console.error("Erro ao agendar consulta:", error);
-      alert("Falha ao agendar a consulta.");
+      notifyError("Falha ao agendar a consulta.");
     }
   };
+  
+  
 
   // Função para abrir o modal de confirmação de exclusão
   const handleDeleteClick = (consultaId) => {
@@ -139,18 +171,18 @@ export const PacienteConsultasViews = () => {
     setIsDeleteModalOpen(true);
   };
 
-  // Função para excluir a consulta
+  
   const handleDeleteConfirm = async () => {
     try {
       const response = await axios.delete(`http://localhost:8080/api/agendamento/${selectedConsultaId}`);
       if (response.status === 200) {
-        alert("Consulta cancelada com sucesso.");
+        notifySuccess("Consulta cancelada com sucesso.");
         setConsultas(consultas.filter(consulta => consulta.id !== selectedConsultaId));
         setIsDeleteModalOpen(false);
       }
     } catch (error) {
       console.error("Erro ao cancelar consulta:", error);
-      alert("Falha ao cancelar a consulta.");
+      notifyError("Falha ao cancelar a consulta.");
     }
   };
 

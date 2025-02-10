@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faSignOutAlt, faHome } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import ".././Sidebar.css";
@@ -10,8 +10,8 @@ export const SidebarPaciente = () => {
   const navigate = useNavigate(); // Hook para navegação
 
   const handleLogout = () => {
-    localStorage.clear(); // Limpa todo o localStorage
-    navigate("/"); // Redireciona para a página de login ou qualquer outra página desejada
+    localStorage.clear(); 
+    navigate("/");
     notifySuccess("Deslogado com sucesso!")
   };
   
@@ -21,6 +21,10 @@ export const SidebarPaciente = () => {
         <img src={logo} alt="eClinic+" />
       </div>
       <nav className="sidebar-nav">
+      <div className="sidebar-item">
+          <FontAwesomeIcon icon={faHome} />
+          <Link to="/">Tela Principal</Link>
+        </div>
         <div className="sidebar-item">
           <FontAwesomeIcon icon={faCalendarAlt} />
           <Link to="/pacienteViews">Consultas</Link>
