@@ -1,30 +1,26 @@
+// SidebarPerfil.jsx
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt, faSignOutAlt, faHome } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.png";
-import ".././Sidebar.css";
-import { notifyError, notifySuccess } from "../../../utils/Util";
+import "../Sidebar.css"; // Caminho de estilo do Sidebar
 
-export const SidebarPaciente = () => {
-  const navigate = useNavigate(); // Hook para navegação
+export const SidebarPerfil = () => {
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.clear(); 
-    navigate("/");
-    notifySuccess("Deslogado com sucesso!")
+    localStorage.clear();
+    navigate("/"); 
+    // Se você tem uma função para mostrar uma notificação, você pode chamar aqui, como 'notifySuccess("Deslogado com sucesso!")'
   };
-  
+
   return (
     <div className="sidebar-container">
       <div className="sidebar-logo">
-        <img src={logo} alt="eClinic+" />
+        <img src={logo} alt="Logo" />
       </div>
       <nav className="sidebar-nav">
-      <div className="sidebar-item">
-          <FontAwesomeIcon icon={faHome} />
-          <Link to="/">Tela Principal</Link>
-        </div>
         <div className="sidebar-item">
           <FontAwesomeIcon icon={faCalendarAlt} />
           <Link to="/pacienteViews">Consultas</Link>
@@ -38,5 +34,3 @@ export const SidebarPaciente = () => {
     </div>
   );
 };
-
-

@@ -1,82 +1,82 @@
-/* Estilo da Tabela de Consultas */
+
 .consulta-table-container {
   max-width: 100%;
-  overflow-x: auto; /* Permite rolagem horizontal em dispositivos pequenos */
+  overflow-x: auto; 
   margin-top: 20px;
 }
 
 .consulta-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #092eaa; /* Cor de fundo clara para maior contraste */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave à tabela */
+  background-color: #092eaa; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
   border-radius: 10px;
-  overflow: hidden; /* Arredonda os cantos da tabela */
+  overflow: hidden; 
 }
 
 .consulta-table th,
 .consulta-table td {
-  padding: 15px 20px; /* Aumenta o espaçamento para maior legibilidade */
+  padding: 15px 20px; 
   text-align: left;
-  border: 1px solid #ddd; /* Bordas sutis para separar as células */
-  font-size: 16px; /* Fonte maior para facilitar a leitura */
+  border: 1px solid #ddd; 
+  font-size: 16px; 
 }
 
 .consulta-table th {
-  background-color: #007bff; /* Cor de fundo azul para os cabeçalhos */
+  background-color: #007bff; 
   color: rgb(255, 255, 255);
   font-weight: bold;
-  text-transform: uppercase; /* Texto dos cabeçalhos em maiúsculas */
+  text-transform: uppercase; 
 }
 
 .consulta-table tr:nth-child(even) {
-  background-color: #0f0472; /* Linhas alternadas para melhorar a leitura */
+  background-color: #0f0472; 
 }
 
 .consulta-table a {
-  color: #f0f2f5; /* Cor do link */
-  text-decoration: none; /* Remove sublinhado */
+  color: #f0f2f5; 
+  text-decoration: none; 
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
 .consulta-table a:hover {
-  color: #ffffff; /* Cor do link ao passar o mouse */
-  text-decoration: underline; /* Sublinha o link ao passar o mouse */
+  color: #ffffff; 
+  text-decoration: underline; 
 }
 
 .consulta-table td .btn-cancelar {
-  background-color: #f44336; /* Cor de fundo vermelha para o botão cancelar */
+  background-color: #f44336; 
   color: white;
   padding: 8px 20px;
   border: none;
-  border-radius: 25px; /* Botão com bordas arredondadas */
+  border-radius: 25px; 
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .consulta-table td .btn-cancelar:hover {
-  background-color: #d32f2f; /* Efeito de hover mais forte */
-  transform: scale(1.05); /* Leve aumento no botão ao passar o mouse */
+  background-color: #d32f2f; 
+  transform: scale(1.05); 
 }
 
 .consulta-table td .btn-cancelar:focus {
-  outline: none; /* Remove o contorno ao clicar no botão */
+  outline: none; 
 }
 
-/* Estilo para o container da tabela */
+
 .consulta-table-container {
   margin-top: 20px;
 }
 
-/* Modificando o texto de "Nenhuma consulta agendada" */
+
 .consulta-table td[colspan="6"] {
   font-size: 18px;
-  color: #999; /* Cor de texto para quando não houver dados */
+  color: #999; 
   text-align: center;
 }
 
-/* Modal de Exclusão */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -120,7 +120,7 @@
 .btn-cancel,
 .btn-confirm {
   padding: 12px 25px;
-  border-radius: 30px; /* Botões com bordas arredondadas */
+  border-radius: 30px; 
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -152,7 +152,7 @@
   font-size: 16px;
 }
 
-/* Modal de Agendamento */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -177,7 +177,6 @@
   animation: modalAppear 0.3s forwards;
 }
 
-/* Animação de aparecimento do modal */
 @keyframes modalAppear {
   from {
     transform: scale(0.9);
@@ -237,7 +236,7 @@ input[type="time"]:disabled {
 .btn-cancel,
 .btn-confirm {
   padding: 12px 25px;
-  border-radius: 30px; /* Botões com bordas arredondadas */
+  border-radius: 30px; 
   font-size: 16px;
   border: none;
   cursor: pointer;
