@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import ActionButtons from "../../../components/ActionButtons/ActionButtons";
 import axios from "axios";
 import "./PacienteConsultasViews.css";
+import { notifyError, notifySuccess } from "../../../utils/Util";
+import { useNavigate } from "react-router-dom";
 
 export const PacienteConsultasViews = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,18 +52,20 @@ export const PacienteConsultasViews = () => {
     fetchMedicos();
   }, [idEspecialidade]);
 
+  const fetchConsultas = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/agendamento/listarTodosPorCpf/${cpf}`);
+      setConsultas(response.data);
+    } catch (error) {
+      console.error("Erro ao carregar consultas:", error);
+    }
+  };
+
   // Buscar consultas ao carregar o componente
   useEffect(() => {
     if (!cpf) return;
 
-    const fetchConsultas = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8080/api/agendamento/listarTodosPorCpf/${cpf}`);
-        setConsultas(response.data);
-      } catch (error) {
-        console.error("Erro ao carregar consultas:", error);
-      }
-    };
+    
 
     fetchConsultas();
   }, [cpf]);
@@ -121,15 +125,16 @@ export const PacienteConsultasViews = () => {
       if (!agendamentoResponse.ok) throw new Error("Erro ao agendar consulta");
 
       console.log("🗓️ Consulta Agendada:", agendamentoData);
-      alert("Consulta agendada com sucesso!");
-      window.location.reload();
+      // window.location.reload();
       // Atualizar lista de consultas após agendar
       setConsultas((prevConsultas) => [...prevConsultas, { ...agendamentoData, medico: { nomeCompleto: medicos.find(med => med.id == idMedico)?.nomeCompleto }, especialidade: { nome: especialidades.find(esp => esp.id == idEspecialidade)?.nome } }]);
-
+      
       handleCloseModal();
+      notifySuccess("Consulta agendada com sucesso!");
+      fetchConsultas();
     } catch (error) {
       console.error("Erro ao agendar consulta:", error);
-      alert("Falha ao agendar a consulta.");
+      notifyError("Falha ao agendar a consulta.");
     }
   };
 
@@ -144,13 +149,14 @@ export const PacienteConsultasViews = () => {
     try {
       const response = await axios.delete(`http://localhost:8080/api/agendamento/${selectedConsultaId}`);
       if (response.status === 200) {
-        alert("Consulta cancelada com sucesso.");
+        notifySuccess("Consulta cancelada com sucesso.");
         setConsultas(consultas.filter(consulta => consulta.id !== selectedConsultaId));
         setIsDeleteModalOpen(false);
+        fetchConsultas();
       }
     } catch (error) {
       console.error("Erro ao cancelar consulta:", error);
-      alert("Falha ao cancelar a consulta.");
+      notifyError("Falha ao cancelar a consulta.");
     }
   };
 
@@ -243,7 +249,7 @@ export const PacienteConsultasViews = () => {
             </select>
 
             <label>Data da Consulta:</label>
-            <input type="date" value={data} onChange={(e) => setData(e.target.value)} />
+            <input type="date" min={new Date().toJSON().slice(0,10)} value={data} onChange={(e) => setData(e.target.value)} />
 
             <label>Horário:</label>
             <input type="time" value={horario} onChange={(e) => setHorario(e.target.value)} />
