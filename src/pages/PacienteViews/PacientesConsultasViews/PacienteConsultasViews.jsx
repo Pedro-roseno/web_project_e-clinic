@@ -3,8 +3,7 @@ import ActionButtons from "../../../components/ActionButtons/ActionButtons";
 import axios from "axios";
 import "./PacienteConsultasViews.css";
 import { notifyError, notifySuccess } from "../../../utils/Util";
-import { useNavigate } from "react-router-dom";
-import { notifyError, notifySuccess } from "../../../utils/Util.js";
+
 export const PacienteConsultasViews = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // Modal para confirmação de exclusão
