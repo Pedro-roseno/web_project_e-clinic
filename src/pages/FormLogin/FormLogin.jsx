@@ -38,12 +38,13 @@ export const FormLogin = () => {
       const response = await AuthPacienteService.login(authData);
       notifySuccess("Usuário autenticado com sucesso!", response);
       localStorage.setItem("cpf", response.username)
+      history('/pacienteViews')
       // Aqui você pode redirecionar o usuário ou atualizar o estado
     } catch (err) {
       setError("Falha ao autenticar: " + err.message);
       notifyError("Falha ao autenticar: " + err.message);
     }
-    history('/pacienteViews')
+    
   };
 
   return (
