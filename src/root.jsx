@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RecSenha from "./pages/RecuperaçãodeSenha/FormRecuperacao";
 import Home from "./pages/Home/Home";
-import ProfileEdit from "./pages/EditProfile/EditProfile";
+import EditProfile from "./pages/EditProfile/EditProfile";
+import Perfil from "./pages/Perfil/Perfil";
 
 import {AdminViews} from "./pages/AdminViews/index";
 import {AdminConsultasViews} from "./pages/AdminViews/AdminConsultasViews/AdminConsultasViews";
@@ -9,20 +10,15 @@ import {AdminMedicosViews} from "./pages/AdminViews/AdminMedicosViews/AdminMedic
 
 import { MedicoViews } from "./pages/MedicoViews/index";
 
-
 import { PacienteViews } from "./pages/PacienteViews/index";
-
 
 import { FormCadastro } from "./pages/FormCadastro/FormCadastro";
 
 import { FormLogin } from "./pages/FormLogin/FormLogin";
 
-
 import {Agendamento} from "./pages/Agendamento/FormAgendamento"
 
 import {Especialidade} from "./pages/Especialidade/FormEspecialidade"
-
-
 
 import { TestIcons } from "./components/ActionButtons/testicon";
 
@@ -68,8 +64,12 @@ const router = createBrowserRouter([
     element: <FormCadastro />,
   },
   {
-    path: "/profile_edit",
-    element: <ProfileEdit />,
+    path: "/editProfile",
+    element: <EditProfile />,
+  },  
+  {
+    path: "/perfil",
+    element: <Perfil />,
   },
   {
     path: "/testicons",

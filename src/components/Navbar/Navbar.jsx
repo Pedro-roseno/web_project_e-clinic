@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import profilePic from "../../assets/user.png";
 import { useNavigate } from "react-router-dom"; // Importando o useNavigate
 import axios from "axios"; // Importando o axios
@@ -48,9 +48,9 @@ export const Navbar = () => {
         <span className="navbar-username">{nomePaciente}</span>
         {dropdownOpen && (
           <div className="navbar-dropdown">
-            <div className="navbar-dropdown-item">
-              <FontAwesomeIcon icon={faEdit} />
-              <span>Editar Perfil</span>
+            <div className="navbar-dropdown-item" onClick={() => navigate("/Perfil")}>
+              <FontAwesomeIcon icon={faUser} />
+              <span>Perfil</span>
             </div>
             <div className="navbar-dropdown-item" onClick={handleLogout}>
               <FontAwesomeIcon icon={faSignOutAlt} />
