@@ -99,11 +99,11 @@ export const FormCadastro = () => {
             <div className="input-group">
               <FontAwesomeIcon icon={faIdCard} />
               <input
-                value={cpf}
+                value={crm}
                 type="text"
-                placeholder="CPF"
+                placeholder="CRM"
                 required
-                onChange={(e) => setCpf(e.target.value)}
+                onChange={(e) => setCrm(e.target.value)}
               />
             </div>
 
