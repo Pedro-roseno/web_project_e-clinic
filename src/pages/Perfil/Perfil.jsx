@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import AuthPacienteService from "../../services/AuthPaciente.service"; // Importa o serviço de autenticação
+import AuthPacienteService from "../../services/AuthPaciente.service"; //autenticação
 import Navbar from "../../components/Navbar/Navbar";
 import { Footer } from "../../components/Footer/Footer";
 import "../../styles/global.css";
@@ -9,7 +9,7 @@ import "./Perfil.css";
 
 const Perfil = () => {
   const [profileData, setProfileData] = useState({
-    nameCompleto: "",
+    nomeCompleto: "",
     cpf: "",
     dataNascimento: "",
     email: "",
@@ -21,9 +21,22 @@ const Perfil = () => {
 
   const navigate = useNavigate();
 
+  //formato da data
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const [year, month, day] = dateString.split("-");
+    return `${day}/${month}/${year}`;
+  };
+
+  // formato cpf
+  const formatCPF = (cpf) => {
+    if (!cpf) return "";
+    return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
+  };
+
   const fetchProfileData = async () => {
     try {
-      const token = AuthPacienteService.getAuthToken(); // Obtém o token corretamente
+      const token = AuthPacienteService.getAuthToken(); //token
       
       if (!token) {
         console.error("Token de autenticação não encontrado!");
@@ -40,7 +53,15 @@ const Perfil = () => {
         },
       });
 
-      setProfileData(response.data);
+      const userData = response.data;
+
+      // Atualiza o estado formatando CPF e data de nascimento
+      setProfileData({
+        ...userData,
+        dataNascimento: formatDate(userData.dataNascimento), // Formata a data antes de armazenar
+        cpf: formatCPF(userData.cpf), // Formata o CPF antes de armazenar
+      });
+
     } catch (error) {
       console.error("Erro ao buscar dados do paciente:", error);
       setProfileData((prevState) => ({
@@ -81,8 +102,8 @@ const Perfil = () => {
 
               <div className="inputs-wrapper">
                 <div className="form-group">
-                  <label htmlFor="name">Nome Completo</label>
-                  <input type="text" id="name" value={profileData.nameCompleto} disabled />
+                  <label htmlFor="nomeCompleto">Nome Completo</label>
+                  <input type="text" id="nomeCompleto" value={profileData.nomeCompleto} disabled />
                 </div>
                 <div className="form-group">
                   <label htmlFor="cpf">CPF</label>
