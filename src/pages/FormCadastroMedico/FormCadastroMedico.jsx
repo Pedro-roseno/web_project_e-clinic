@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./FormCadastro.css";
+import "./FormCadastroMedico.css";
 import pacienteService from "../../services/Paciente.service.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,7 +16,7 @@ import {
 import { notifyError, notifySuccess } from "../../utils/Util.js";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export const FormCadastro = () => {
+export const FormCadastroMedico = () => {
   const { state } = useLocation();
   const [idPaciente, setIdPaciente] = useState();
   const history = useNavigate()
@@ -47,22 +47,26 @@ export const FormCadastro = () => {
 
   const [nomeCompleto, setNomeCompleto] = useState("");
   const [cpf, setCpf] = useState("");
+  const [crm, setCrm] = useState("");
   const [email, setEmail] = useState("");
   const [dataNascimento, setDataNascimento] = useState();
   const [enderecoCidade, setEnderecoCidade] = useState();
   const [enderecoUf, setEnderecoUf] = useState();
   const [senha, setSenha] = useState();
+  const [linkMeet, setLinkMeet] = useState();
 
   const salvar = (event) => {
     event.preventDefault(); // Evita recarregar a página
     let clienteRequest = {
       nomeCompleto: nomeCompleto,
       cpf: cpf,
+      crm: crm,
       email: email,
       dataNascimento: dataNascimento,
       enderecoCidade: enderecoCidade,
       enderecoUf: enderecoUf,
       senha: senha,
+      linkMeet: linkMeet
     };
 
     // Cadastro:
@@ -94,7 +98,7 @@ export const FormCadastro = () => {
 
       <div className="cadastro-box">
         <div className="cadastro-form">
-          <h2>Cadastro</h2>
+          <h2>Cadastro Médico</h2>
           <form className="form-grid">
             <div className="input-group">
               <FontAwesomeIcon icon={faIdCard} />
@@ -173,11 +177,22 @@ export const FormCadastro = () => {
               />
             </div>
 
+            <div className="input-group">
+              <FontAwesomeIcon icon={faLock} />
+              <input
+                value={linkMeet}
+                type="text"
+                placeholder="Link do seu Meet"
+                required
+                onChange={(e) => setLinkMeet(e.target.value)}
+              />
+            </div>
+
             <button onClick={(event) => salvar(event)} type="submit">
               Cadastrar
             </button>
           </form>
-          <Link to="/formLogin" className="toggle-btn">
+          <Link to="/formLoginMedicos" className="toggle-btn">
             Já tem conta? Faça login
           </Link>
         </div>
