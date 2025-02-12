@@ -83,9 +83,6 @@ export const FormLoginMedico = () => {
               Entrar
             </button>
           </form>
-          <Link to="/formCadastroMedicos" className="toggle-btn">
-            Criar conta
-          </Link>
         </div>
       </div>
     </div>

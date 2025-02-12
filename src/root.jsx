@@ -21,7 +21,6 @@ import {Agendamento} from "./pages/Agendamento/FormAgendamento"
 import {Especialidade} from "./pages/Especialidade/FormEspecialidade"
 
 import { TestIcons } from "./components/ActionButtons/testicon";
-import { FormCadastroMedico } from "./pages/FormCadastroMedico/FormCadastroMedico";
 import { FormLoginMedico } from "./FormLoginMedico/FormLoginMedico";
 
 
@@ -60,10 +59,6 @@ const router = createBrowserRouter([
   {
     path: "/formLogin",
     element: <FormLogin />,
-  },
-  {
-    path: "/formCadastroMedicos",
-    element: <FormCadastroMedico />,
   },
   {
     path: "/formLoginMedicos",
