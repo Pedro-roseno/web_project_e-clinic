@@ -69,19 +69,21 @@ export const FormCadastro = () => {
     pacienteService
       .create(clienteRequest)
       .then((response) => {
+        history('/formLogin')
         notifySuccess("Cliente cadastrado com sucesso.");
       })
       .catch((error) => {
         if(error.response.data.errors !=undefined){
           for(let i = 0; i<error.response.data.errors.length; i++){
             notifyError(error.response.data.errors[i].defaultMessage)
+            
           }
         }else{
-          notifyError(error.response.data.message)
+          notifyError("Erro ao cadastrar")
         }
       });
 
-      history('/formLogin')
+      
   };
 
   return (

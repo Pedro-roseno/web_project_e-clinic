@@ -8,13 +8,14 @@ import image3 from "../../assets/image3.jpg";
 import sobre from "../../assets/sobre.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp} from "@fortawesome/free-brands-svg-icons";
-import { faUserNurse, faHandHoldingMedical, faRightToBracket, faRobot, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faUserNurse, faHandHoldingMedical, faRightToBracket, faRobot, faEnvelope, faCircleNodes } from "@fortawesome/free-solid-svg-icons";
 
 import { Footer } from "../../components/Footer/Footer";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const slides = [image1, image2, image3];
 
@@ -41,6 +42,10 @@ const Home = () => {
 
   const handleMouseLeave = () => {
     setDropdownOpen(false);
+  };
+
+  const handleDeleteClick = () => {
+    setIsDeleteModalOpen(true);
   };
 
   return (
@@ -71,11 +76,11 @@ const Home = () => {
               </li>
             </ul>
           </nav>
-          <a href="./formLogin"  rel="noopener noreferrer">
-            <button className="home-login-button">
+          
+            <button className="home-login-button" onClick={handleDeleteClick}>
               Entrar <FontAwesomeIcon icon={faRightToBracket} className="icon-desktop" />
             </button>
-          </a>
+          
         </div>
       </header>
 
@@ -151,6 +156,24 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {isDeleteModalOpen && (
+      <div className="modal-overlay" onClick={() => setIsDeleteModalOpen(false)}>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      
+      <h2>Você é Médico ou Paciente?</h2>
+      <div className="modal-buttons">
+        <Link to={"/formLoginMedicos"}>
+          <button className="btn-cancel">Médico</button>
+        </Link>
+        <Link to={"/formLogin"}>
+          <button className="btn-confirm">Paciente</button>
+        </Link>
+      </div>
+    </div>
+  </div>
+)}
+
 
       <Footer />
     </div>

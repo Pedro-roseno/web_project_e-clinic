@@ -16,7 +16,7 @@ export const MedicoConsultasViews = () => {
   const [consultas, setConsultas] = useState([]);
   const [selectedConsultaId, setSelectedConsultaId] = useState(null); // ID da consulta selecionada para exclusão
 
-  const cpf = localStorage.getItem("cpf");
+  const crm = localStorage.getItem("crm");
 
   // Buscar especialidades ao carregar o componente
   useEffect(() => {
@@ -52,11 +52,11 @@ export const MedicoConsultasViews = () => {
 
   // Buscar consultas ao carregar o componente
   useEffect(() => {
-    if (!cpf) return;
+    if (!crm) return;
 
     const fetchConsultas = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/agendamento/listarTodosPorCpf/${cpf}`);
+        const response = await axios.get(`http://localhost:8080/api/agendamento/listarTodosPorCrm/${crm}`);
         setConsultas(response.data);
       } catch (error) {
         console.error("Erro ao carregar consultas:", error);
@@ -64,7 +64,7 @@ export const MedicoConsultasViews = () => {
     };
 
     fetchConsultas();
-  }, [cpf]);
+  }, [crm]);
 
   const handleEspecialidadeChange = (e) => {
     setIdEspecialidade(e.target.value);
@@ -86,18 +86,19 @@ export const MedicoConsultasViews = () => {
 
   // 🗓️ Função para agendar a consulta
   const handleAgendar = async () => {
-    if (!cpf) {
-      console.error("CPF não encontrado no localStorage.");
+    if (!crm) {
+      console.error("CRM não encontrado no localStorage.");
       return;
     }
 
     try {
-      // Buscar ID do paciente
-      const pacienteResponse = await fetch(`http://localhost:8080/api/pacientes/buscarPorCpf/${cpf}`);
-      if (!pacienteResponse.ok) throw new Error("Erro ao buscar paciente");
+      // Buscar ID do medico
+      const medicoResponse = await fetch(`http://localhost:8080/api/medicos/buscarPorCrm/${crm}`);
+      if (!medicoResponse.ok) throw new Error("Erro ao buscar medico");
 
-      const pacienteData = await pacienteResponse.json();
-      const idPaciente = pacienteData.id;
+      const medicoData = await medicoResponse.json();
+      const idMedico = medicoData.id;
+      console.log(idMedico)
 
       // Converter data para o formato "dd/MM/yyyy"
       const dataFormatada = data.split("-").reverse().join("/");
@@ -106,7 +107,7 @@ export const MedicoConsultasViews = () => {
       const agendamentoData = {
         idMedico: idMedico,
         idEspecialidade,
-        idPaciente,
+      
         dataAgendamento: dataFormatada, // Data corrigida
         horarioAgendamento: horario,
       };

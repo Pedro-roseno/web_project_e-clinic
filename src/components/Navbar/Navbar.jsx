@@ -10,8 +10,10 @@ import { notifyError, notifySuccess } from "../../utils/Util";
 export const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [nomePaciente, setNomePaciente] = useState("Carregando...");
+  const [nomeMedico, setNomeMedico] = useState("Carregando...");
 
   const cpf = localStorage.getItem("cpf"); // Pegando o CPF armazenado
+  const crm = localStorage.getItem("crm"); // Pegando o CRM armazenado
   const navigate = useNavigate(); // Hook para navegação
 
   useEffect(() => {
@@ -25,10 +27,20 @@ export const Navbar = () => {
           console.error("Erro ao buscar paciente:", error);
           setNomePaciente("Usuário");
         });
-    } else {
+    } else if(crm){
+      axios
+      .get(`http://localhost:8080/api/medicos/buscarPorCrm/${crm}`)
+        .then((response) => {
+          setNomeMedico(response.data.nomeCompleto); // Atualiza o nome do paciente
+        })
+        .catch((error) => {
+          console.error("Erro ao buscar paciente:", error);
+          setNomePaciente("Usuário");
+        });
+    } else{
       setNomePaciente("Usuário");
     }
-  }, [cpf]); // Executa a requisição quando o CPF estiver disponível
+  }, [cpf,crm]); // Executa a requisição quando o CPF estiver disponível
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -45,7 +57,7 @@ export const Navbar = () => {
       <h1 className="navbar-title">eClinic+</h1>
       <div className="navbar-profile" onClick={toggleDropdown}>
         <img src={profilePic} alt="Perfil" className="navbar-profile-pic" />
-        <span className="navbar-username">{nomePaciente}</span>
+        <span className="navbar-username">{nomePaciente||nomeMedico}</span>
         {dropdownOpen && (
           <div className="navbar-dropdown">
             <div className="navbar-dropdown-item" onClick={() => navigate("/Perfil")}>

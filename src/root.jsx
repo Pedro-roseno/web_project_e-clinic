@@ -21,6 +21,7 @@ import {Agendamento} from "./pages/Agendamento/FormAgendamento"
 import {Especialidade} from "./pages/Especialidade/FormEspecialidade"
 
 import { TestIcons } from "./components/ActionButtons/testicon";
+import { FormLoginMedico } from "./FormLoginMedico/FormLoginMedico";
 
 
 const router = createBrowserRouter([
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
   {
     path: "/formLogin",
     element: <FormLogin />,
+  },
+  {
+    path: "/formLoginMedicos",
+    element: <FormLoginMedico />,
   },
   {
     path: "/formCadastro",
