@@ -45,8 +45,8 @@
     text-decoration: underline; /* Sublinha o link ao passar o mouse */
   }
   
-  .consulta-table td .btn-cancelar {
-    background-color: #f44336; /* Cor de fundo vermelha para o botão cancelar */
+  .consulta-table td .btn-concluir {
+    background-color: #437929; /* Cor de fundo vermelha para o botão cancelar */
     color: white;
     padding: 8px 20px;
     border: none;
@@ -55,12 +55,12 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
   }
   
-  .consulta-table td .btn-cancelar:hover {
-    background-color: #d32f2f; /* Efeito de hover mais forte */
+  .consulta-table td .btn-concluir:hover {
+    background-color: #099b1c; /* Efeito de hover mais forte */
     transform: scale(1.05); /* Leve aumento no botão ao passar o mouse */
   }
   
-  .consulta-table td .btn-cancelar:focus {
+  .consulta-table td .btn-concluir:focus {
     outline: none; /* Remove o contorno ao clicar no botão */
   }
   

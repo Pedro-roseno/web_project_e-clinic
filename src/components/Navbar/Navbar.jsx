@@ -14,6 +14,7 @@ export const Navbar = () => {
 
   const cpf = localStorage.getItem("cpf"); // Pegando o CPF armazenado
   const crm = localStorage.getItem("crm"); // Pegando o CRM armazenado
+  console.log("aqui está:", crm)
   const navigate = useNavigate(); // Hook para navegação
 
   useEffect(() => {
@@ -21,27 +22,33 @@ export const Navbar = () => {
       axios
         .get(`http://localhost:8080/api/pacientes/buscarPorCpf/${cpf}`)
         .then((response) => {
-          setNomePaciente(response.data.nomeCompleto); // Atualiza o nome do paciente
+          setNomePaciente(response.data.nomeCompleto);
         })
         .catch((error) => {
           console.error("Erro ao buscar paciente:", error);
           setNomePaciente("Usuário");
         });
-    } else if(crm){
+    } else if (crm) {
       axios
-      .get(`http://localhost:8080/api/medicos/buscarPorCrm/${crm}`)
+        .get(`http://localhost:8080/api/medicos/buscarPorCrm/${crm}`)
         .then((response) => {
-          setNomeMedico(response.data.nomeCompleto); // Atualiza o nome do paciente
+          setNomeMedico(response.data.nomeCompleto);
         })
         .catch((error) => {
-          console.error("Erro ao buscar paciente:", error);
-          setNomePaciente("Usuário");
+          console.error("Erro ao buscar médico:", error);
+          setNomeMedico("Usuário");
         });
-    } else{
+    } else {
       setNomePaciente("Usuário");
+      setNomeMedico("Usuário");
     }
-  }, [cpf,crm]); // Executa a requisição quando o CPF estiver disponível
-
+  }, [cpf, crm]);
+  
+  // Ajuste na exibição do nome no JSX
+  <span className="navbar-username">
+    {cpf ? nomePaciente : nomeMedico}
+  </span>
+  
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
@@ -57,7 +64,7 @@ export const Navbar = () => {
       <h1 className="navbar-title">eClinic+</h1>
       <div className="navbar-profile" onClick={toggleDropdown}>
         <img src={profilePic} alt="Perfil" className="navbar-profile-pic" />
-        <span className="navbar-username">{nomePaciente||nomeMedico}</span>
+        <span className="navbar-username">{cpf ? nomePaciente : nomeMedico}</span>
         {dropdownOpen && (
           <div className="navbar-dropdown">
             <div className="navbar-dropdown-item" onClick={() => navigate("/Perfil")}>
