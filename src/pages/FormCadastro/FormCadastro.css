@@ -10,6 +10,12 @@ html, body {
   height: 100%;
 }
 
+.alerta {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}
 
 .cadastro-container {
   display: grid;
