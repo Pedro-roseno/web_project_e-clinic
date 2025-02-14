@@ -6,36 +6,42 @@ import logo from "../../assets/logo.png";
 import { Footer } from "../../components/Footer/Footer";
 
 function RecSenha() {
-  const [count, setCount] = useState(0);
+  const [novaSenha, setNovaSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [tipoUsuario, setTipoUsuario] = useState("medico"); // Pode ser "medico" ou "paciente"
 
+  // Função de validação de senha
+  function validarSenha(senha) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
+    return regex.test(senha);
+  }
 
-  const [novasenha, setNovaSenha] = useState();
-  const [cormfirmarsenha, setComfirmarSenha] = useState();
+  async function salvar() {
+    if (novaSenha !== confirmarSenha) {
+      alert("As senhas não coincidem!");
+      return;
+    }
 
-  function salvar() {
+    if (!validarSenha(novaSenha)) {
+      alert(
+        "A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um caractere especial (@, #, etc.)."
+      );
+      return;
+    }
 
-		let recsenhaRequest = {
-      novasenha:  novasenha,
-      cormfirmarsenha: cormfirmarsenha
-		   
-		}
-	
-		axios.post("http://localhost:8080/api/medicos", recsenhaRequest)
-		.then((response) => {
-		     console.log('Senha alterada com sucesso.')
-		})
-		.catch((error) => {
-		     console.log('Erro ao alterar a senha.')
-		})
-	
-  axios.post("http://localhost:8080/api/pacientes", recsenhaRequest)
-  .then((response) => {
-       console.log('Senha alterada com sucesso.')
-  })
-  .catch((error) => {
-       console.log('Erro ao alterar a senha.')
-  })
-}
+    const request = { senha: novaSenha };
+
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/api/${tipoUsuario}s/recuperar-senha`,
+        request
+      );
+      alert("Senha alterada com sucesso!");
+    } catch (error) {
+      console.error("Erro ao alterar a senha:", error);
+      alert("Erro ao alterar a senha. Tente novamente.");
+    }
+  }
 
   return (
     <>
@@ -59,9 +65,8 @@ function RecSenha() {
                 required
                 type="password"
                 placeholder="Digite sua nova senha"
-                value={novasenha}
-			          onChange={e => setNovaSenha(e.target.value)}
-
+                value={novaSenha}
+                onChange={(e) => setNovaSenha(e.target.value)}
               />
 
               <input
@@ -69,15 +74,25 @@ function RecSenha() {
                 required
                 type="password"
                 placeholder="Confirme sua nova senha"
-                value={cormfirmarsenha}
-			          onChange={e => setComfirmarSenha(e.target.value)}
+                value={confirmarSenha}
+                onChange={(e) => setConfirmarSenha(e.target.value)}
               />
 
+              <select
+                className="input_area"
+                value={tipoUsuario}
+                onChange={(e) => setTipoUsuario(e.target.value)}
+              >
+                <option value="medico">Médico</option>
+                <option value="paciente">Paciente</option>
+              </select>
             </section>
-            <div id="button_area">
-              <button id="form_button" onClick={() => salvar()}>Alterar senha</button>
-            </div>
 
+            <div id="button_area">
+              <button id="form_button" onClick={salvar}>
+                Alterar senha
+              </button>
+            </div>
           </div>
           <div id="content_section_rigth1">
             <div id="password_advice_box1">
