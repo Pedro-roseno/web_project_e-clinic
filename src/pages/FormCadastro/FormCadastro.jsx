@@ -11,7 +11,7 @@ import {
   faIdCard,
   faLocationDot,
   faCity,
-  faCakeCandles
+  faCakeCandles,
 } from "@fortawesome/free-solid-svg-icons";
 import { notifyError, notifySuccess } from "../../utils/Util.js";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 export const FormCadastro = () => {
   const { state } = useLocation();
   const [idPaciente, setIdPaciente] = useState();
-  const history = useNavigate()
+  const history = useNavigate();
 
   useEffect(() => {
     if (state != null && state.id != null) {
@@ -37,53 +37,74 @@ export const FormCadastro = () => {
   }, [state]);
 
   function formatarData(dataParam) {
-    if (dataParam === null || dataParam === "" || dataParam === undefined) {
-      return "";
-    }
-
+    if (!dataParam) return "";
     let arrayData = dataParam.split("-");
-    return arrayData[2] + "/" + arrayData[1] + "/" + arrayData[0];
+    return `${arrayData[2]}/${arrayData[1]}/${arrayData[0]}`;
   }
 
   const [nomeCompleto, setNomeCompleto] = useState("");
   const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
-  const [dataNascimento, setDataNascimento] = useState();
-  const [enderecoCidade, setEnderecoCidade] = useState();
-  const [enderecoUf, setEnderecoUf] = useState();
-  const [senha, setSenha] = useState();
+  const [dataNascimento, setDataNascimento] = useState("");
+  const [enderecoCidade, setEnderecoCidade] = useState("");
+  const [enderecoUf, setEnderecoUf] = useState("");
+  const [senha, setSenha] = useState("");
+  const [alertas, setAlertas] = useState({
+    cpf: "",
+    nomeCompleto: "",
+    email: "",
+    dataNascimento: "",
+    enderecoCidade: "",
+    enderecoUf: "",
+    senha: "",
+  });
+
+  const validarCampos = () => {
+    let erros = {};
+
+    if (!cpf) erros.cpf = "Por favor, informe seu CPF.";
+    if (!nomeCompleto) erros.nomeCompleto = "Por favor, informe seu nome completo.";
+    if (!email) erros.email = "Por favor, informe seu email.";
+    if (!dataNascimento) erros.dataNascimento = "Por favor, informe sua data de nascimento.";
+    if (!enderecoCidade) erros.enderecoCidade = "Por favor, informe sua cidade.";
+    if (!enderecoUf) erros.enderecoUf = "Por favor, informe seu estado.";
+    if (!senha) erros.senha = "Por favor, crie uma senha.";
+
+    setAlertas(erros);
+    return Object.keys(erros).length === 0;
+  };
 
   const salvar = (event) => {
-    event.preventDefault(); // Evita recarregar a página
+    event.preventDefault();
+
+    if (!validarCampos()) {
+      notifyError("Preencha todos os campos obrigatórios.");
+      return;
+    }
+
     let clienteRequest = {
-      nomeCompleto: nomeCompleto,
-      cpf: cpf,
-      email: email,
-      dataNascimento: dataNascimento,
-      enderecoCidade: enderecoCidade,
-      enderecoUf: enderecoUf,
-      senha: senha,
+      nomeCompleto,
+      cpf,
+      email,
+      dataNascimento,
+      enderecoCidade,
+      enderecoUf,
+      senha,
     };
 
-    // Cadastro:
     pacienteService
       .create(clienteRequest)
-      .then((response) => {
-        history('/formLogin')
+      .then(() => {
+        history("/formLogin");
         notifySuccess("Cliente cadastrado com sucesso.");
       })
       .catch((error) => {
-        if(error.response.data.errors !=undefined){
-          for(let i = 0; i<error.response.data.errors.length; i++){
-            notifyError(error.response.data.errors[i].defaultMessage)
-            
-          }
-        }else{
-          notifyError("Erro ao cadastrar")
+        if (error.response?.data?.errors) {
+          error.response.data.errors.forEach((err) => notifyError(err.defaultMessage));
+        } else {
+          notifyError("Erro ao cadastrar");
         }
       });
-
-      
   };
 
   return (
@@ -104,10 +125,11 @@ export const FormCadastro = () => {
                 value={cpf}
                 type="text"
                 placeholder="CPF"
-                required
                 onChange={(e) => setCpf(e.target.value)}
               />
             </div>
+
+		{alertas.cpf && <span className="alerta">{alertas.cpf}</span>}
 
             <div className="input-group">
               <FontAwesomeIcon icon={faUser} />
@@ -115,10 +137,11 @@ export const FormCadastro = () => {
                 value={nomeCompleto}
                 type="text"
                 placeholder="Nome Completo"
-                required
                 onChange={(e) => setNomeCompleto(e.target.value)}
               />
             </div>
+
+              {alertas.nomeCompleto && <span className="alerta">{alertas.nomeCompleto}</span>}
 
             <div className="input-group">
               <FontAwesomeIcon icon={faEnvelope} />
@@ -126,32 +149,11 @@ export const FormCadastro = () => {
                 value={email}
                 type="email"
                 placeholder="Email"
-                required
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
-            <div className="input-group">
-            <FontAwesomeIcon icon={faLocationDot} />
-              <input
-                value={enderecoUf}
-                type="text"
-                placeholder="Estado"
-                required
-                onChange={(e) => setEnderecoUf(e.target.value)}
-              />
-            </div>
-
-            <div className="input-group">
-              <FontAwesomeIcon icon={faCity} />
-              <input
-                value={enderecoCidade}
-                type="text"
-                placeholder="Cidade"
-                required
-                onChange={(e) => setEnderecoCidade(e.target.value)}
-              />
-            </div>
+		{alertas.email && <span className="alerta">{alertas.email}</span>}
 
             <div className="input-group">
               <FontAwesomeIcon icon={faCakeCandles} />
@@ -159,10 +161,36 @@ export const FormCadastro = () => {
                 value={dataNascimento}
                 type="text"
                 placeholder="Data de Nascimento"
-                required
                 onChange={(e) => setDataNascimento(e.target.value)}
               />
+              
             </div>
+
+		{alertas.dataNascimento && <span className="alerta">{alertas.dataNascimento}</span>}
+
+            <div className="input-group">
+              <FontAwesomeIcon icon={faCity} />
+              <input
+                value={enderecoCidade}
+                type="text"
+                placeholder="Cidade"
+                onChange={(e) => setEnderecoCidade(e.target.value)}
+              />
+            </div>
+
+              {alertas.enderecoCidade && <span className="alerta">{alertas.enderecoCidade}</span>}
+
+            <div className="input-group">
+              <FontAwesomeIcon icon={faLocationDot} />
+              <input
+                value={enderecoUf}
+                type="text"
+                placeholder="Estado"
+                onChange={(e) => setEnderecoUf(e.target.value)}
+              />
+            </div>
+
+		{alertas.enderecoUf && <span className="alerta">{alertas.enderecoUf}</span>}
 
             <div className="input-group">
               <FontAwesomeIcon icon={faLock} />
@@ -170,12 +198,13 @@ export const FormCadastro = () => {
                 value={senha}
                 type="password"
                 placeholder="Senha"
-                required
                 onChange={(e) => setSenha(e.target.value)}
               />
             </div>
 
-            <button onClick={(event) => salvar(event)} type="submit">
+		{alertas.senha && <span className="alerta">{alertas.senha}</span>}
+
+            <button onClick={salvar} type="submit">
               Cadastrar
             </button>
           </form>
