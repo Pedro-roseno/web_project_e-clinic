@@ -86,19 +86,6 @@ const Perfil = () => {
           )}
           <form>
             <div className="form-wrapper">
-              <div className="profile-pic-wrapper">
-                <div className="profile-pic-preview">
-                  {profileData.profilePic && (
-                    <img
-                      src={profileData.profilePic}
-                      alt="Foto de Perfil"
-                      className="profile-pic"
-                    />
-                  )}
-                  <span>Escolha uma foto</span>
-                  <input type="file" accept="image/*" />
-                </div>
-              </div>
 
               <div className="inputs-wrapper">
                 <div className="form-group">

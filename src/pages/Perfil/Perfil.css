@@ -1,14 +1,11 @@
-/* Container principal do perfil */
 #profile-main-container {
   display: flex;
-  padding-top: 60px; /* Espaço para a Navbar fixa */
-  padding-bottom: 50px; /* Espaço para o Footer */
+  padding-top: 60px; 
+  padding-bottom: 50px; 
 }
-
-/* Sidebar */
 .sidebar-container {
-  width: 250px; /* Largura da sidebar */
-  position: fixed; /* Sidebar fixa à esquerda */
+  width: 250px; 
+  position: fixed; 
   top: 0;
   left: 0;
   bottom: 0;
@@ -18,54 +15,14 @@
   z-index: 1000;
 }
 
-/* Container do perfil */
 .profile-container {
-  margin-left: 250px; /* Espaço para a sidebar */
-  width: calc(100% - 250px); /* O restante da largura */
+  margin-left: 250px; 
+  width: calc(100% - 250px);
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-
-/* Seção de foto do perfil */
-.profile-pic-wrapper {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.profile-pic-preview img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #ddd;
-}
-
-.profile-pic-preview input {
-  margin-top: 10px;
-}
-
-/* Estilo dos campos de entrada */
-.inputs-wrapper .form-group {
-  margin-bottom: 15px;
-}
-
-.inputs-wrapper label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.inputs-wrapper input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-/* Botão de "Editar Perfil" */
 .submit-group button {
   padding: 10px 20px;
   background-color: #1d4b91;
