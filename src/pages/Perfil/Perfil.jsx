@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import AuthPacienteService from "../../services/AuthPaciente.service"; //autenticação
-import Navbar from "../../components/Navbar/Navbar";
+import AuthPacienteService from "../../services/AuthPaciente.service";
 import { Footer } from "../../components/Footer/Footer";
 import "../../styles/global.css";
 import "./Perfil.css";
@@ -21,14 +20,12 @@ const Perfil = () => {
 
   const navigate = useNavigate();
 
-  //formato da data
   const formatDate = (dateString) => {
     if (!dateString) return "";
     const [year, month, day] = dateString.split("-");
     return `${day}/${month}/${year}`;
   };
 
-  // formato cpf
   const formatCPF = (cpf) => {
     if (!cpf) return "";
     return cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
@@ -47,7 +44,7 @@ const Perfil = () => {
         return;
       }
 
-      const response = await axios.get("http://localhost:8080/api/pacientes/1", {
+      const response = await axios.get("http://localhost:8080/api/pacientes/1", { //colocando id manualmente
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -55,11 +52,10 @@ const Perfil = () => {
 
       const userData = response.data;
 
-      // Atualiza o estado formatando CPF e data de nascimento
       setProfileData({
         ...userData,
-        dataNascimento: formatDate(userData.dataNascimento), // Formata a data antes de armazenar
-        cpf: formatCPF(userData.cpf), // Formata o CPF antes de armazenar
+        dataNascimento: formatDate(userData.dataNascimento), 
+        cpf: formatCPF(userData.cpf), 
       });
 
     } catch (error) {

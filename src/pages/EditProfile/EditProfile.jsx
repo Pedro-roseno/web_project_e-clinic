@@ -45,7 +45,7 @@ const EditProfile = () => {
         return;
       }
 
-      const response = await axios.get("http://localhost:8080/api/pacientes/1", {
+      const response = await axios.get("http://localhost:8080/api/pacientes/1", { //colocando id manualmente
         headers: { Authorization: `Bearer ${token}` },
       });
 
