@@ -217,7 +217,7 @@ export const PacienteConsultasViews = () => {
         <td>{consulta.especialidade.nome}</td>
         <td>{consulta.dataAgendmento ? consulta.dataAgendmento.split('-').reverse().join('/') : consulta.dataAgendmento}</td>
         <td>{consulta.horarioAgendamento}</td>
-        <td><a href={consulta.medico.linkMeet}>{consulta.medico.linkMeet}</a></td>
+        <td><a href={consulta.medico.linkMeet} target="_blank" rel="noopener noreferrer" >{consulta.medico.linkMeet}</a></td>
         <td>
           <button className="btn-cancelar" onClick={() => handleDeleteClick(consulta.id)}>Cancelar</button>
         </td>
@@ -231,6 +231,7 @@ export const PacienteConsultasViews = () => {
 </tbody>
         </table>
       </div>
+
 
       {/* Modal de Confirmação de Exclusão */}
       {isDeleteModalOpen && (
@@ -246,6 +247,7 @@ export const PacienteConsultasViews = () => {
         </div>
       )}
 
+      
       {/* Modal de Agendamento */}
       {isModalOpen && (
         <div className="modal-overlay">

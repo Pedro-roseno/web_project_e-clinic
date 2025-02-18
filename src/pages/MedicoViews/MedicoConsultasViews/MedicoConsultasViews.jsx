@@ -54,7 +54,7 @@ export const MedicoConsultasViews = () => {
                   <td>{consulta.paciente.nomeCompleto}</td>
                   <td>{consulta.dataAgendmento?.split("-").reverse().join("/")}</td>
                   <td>{consulta.horarioAgendamento}</td>
-                  <td><a href={consulta.medico.linkMeet}>{consulta.medico.linkMeet}</a></td>
+                  <td><a href={consulta.medico.linkMeet} target="_blank" rel="noopener noreferrer" >{consulta.medico.linkMeet}</a></td>
                   <td>
                     <button className="btn-concluir" onClick={() => handleDeleteClick(consulta.id)}>Concluir</button>
                   </td>
